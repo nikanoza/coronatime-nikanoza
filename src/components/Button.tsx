@@ -3,7 +3,7 @@ import React from 'react';
 const Button: React.FunctionComponent<{
   type: any;
   className: string;
-  onClick: () => {};
+  onClick?: () => {};
   id: string;
   children: any;
 }> = (props) => {
