@@ -5,7 +5,7 @@ const translationValues: { geo: object } = {
       'ავტორიზაციისთვის შეიყვანეთ მოთხოვნილი ინფორმაცია',
     username: 'მომხმარებლის სახელი',
     'Enter unique username or email':
-      'შეიყვანეთ მომხმარებლის სახელი ან ელ.ფოსტა',
+      'შეიყვანეთ მომხმარებლის სახელი ან ელ-ფოსტა',
     password: 'პაროლი',
     'Fill in password': 'შიყვანეთ პაროლი',
     'Remember this device': 'მოწყობილობის დამახსოვრება',
@@ -15,7 +15,7 @@ const translationValues: { geo: object } = {
     'Sign up for free': 'დარეგისტრირდი',
     'Name not found': 'სახელის ველი ცარიელია',
     'Username should be unique, min 3 symbols':
-      'მომხმარებლის სახელი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინ 3 სიმბოლოსგან',
+      'მომხმარებლის სახელი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინიმუმ 3 სიმბოლოსგან',
     'field is ampty': 'ეს ველი არ უნდა იყოს ცარიელი',
   },
 };
