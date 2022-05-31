@@ -4,3 +4,5 @@ export { default as Warning } from './warning.png';
 export { default as Correct } from './correct.png';
 export { default as Eng } from './eng.png';
 export { default as Geo } from './geo.png';
+export { default as Success } from './success.png';
+export { default as Dashboard } from './dashboard.png';

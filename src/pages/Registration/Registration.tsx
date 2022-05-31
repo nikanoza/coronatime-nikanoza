@@ -171,11 +171,7 @@ const Registration = () => {
                 validations={{}}
               />
             </div>
-            <Button
-              type="submit"
-              className="mt-2 w-full flex items-center justify-center pt-3 pb-3 outline-none border-none bg-[#0FBA68] rounded-lg uppercase text-white"
-              id="sign_up"
-            >
+            <Button type="submit" id="sign_up">
               {t('sign up')}
             </Button>
           </form>

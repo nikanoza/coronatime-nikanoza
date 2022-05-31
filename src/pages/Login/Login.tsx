@@ -112,19 +112,17 @@ const Login = () => {
                 validations={{ require: false }}
               />
               <Link
-                to={'/reset-password'}
+                to={'/recovery'}
                 className="text-[#2029F3] ml-auto whitespace-nowrap"
               >
                 {t('Forgot password?')}
               </Link>
             </div>
-            <Button
-              type="submit"
-              className="mt-6 w-5/6 flex items-center justify-center pt-3 pb-3 outline-none border-none bg-[#0FBA68] rounded-lg uppercase text-white"
-              id="login_btn"
-            >
-              {t('log in')}
-            </Button>
+            <div className="w-5/6">
+              <Button type="submit" id="login_btn">
+                {t('log in')}
+              </Button>
+            </div>
           </form>
           <div className="flex mt-6 items-center justify-center w-5/6">
             {t('Don’t have and account?')}
