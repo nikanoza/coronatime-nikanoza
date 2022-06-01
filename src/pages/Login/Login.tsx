@@ -2,22 +2,8 @@ import { Vaccines, Coronatime, Warning } from 'assets/images';
 import { Input, Button, Language } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { translationValues } from 'pages/Login/translation';
 
-import i18next from 'i18next';
-import { initReactI18next, useTranslation } from 'react-i18next';
-
-i18next.use(initReactI18next).init({
-  lng: 'en',
-  debug: false,
-  resources: {
-    geo: {
-      translation: {
-        ...translationValues.geo,
-      },
-    },
-  },
-});
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   type FormValues = {

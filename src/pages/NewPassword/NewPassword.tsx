@@ -3,32 +3,8 @@ import { Button, Input } from 'components';
 import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
-import i18next from 'i18next';
-import { initReactI18next, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-i18next.use(initReactI18next).init({
-  lng: 'geo',
-  debug: false,
-  resources: {
-    geo: {
-      translation: {
-        'new password': 'ახალი პაროლი',
-        'reset password': 'პაროლის აღდგენა',
-        'field is ampty': 'ეს ველი არ შეიძლება იყოს ცარიელი',
-        'Password should be unique, min 3 symbols':
-          'პაროლი უნდა იყოს უნიკალური, შედგებოდეს მინიმუმ 3 სიმბოლოსგან',
-        'Repeat password': 'გაიმეორე პარელი',
-        'reapeat password': 'გაიმეორე პარელი',
-        'Enter new password': 'შეიყვანეთ ახალი პაროლი',
-        'save changes': 'ცვლილებების შენახვა',
-        'sign in': 'შესვლა',
-        'Your password has been updeted successfully':
-          'პაროლი წარმატებით განახლდა',
-        'password did not match': 'უნდა ემთხვეოდეს პაროლს',
-      },
-    },
-  },
-});
 const NewPassword = () => {
   const [sentReq, setSentReq] = useState(false);
 

@@ -3,22 +3,9 @@ import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
 import { Link } from 'react-router-dom';
 import { Warning } from 'assets/images';
+import { usePostHttp } from 'hooks';
 
-import i18next from 'i18next';
-import { initReactI18next, useTranslation } from 'react-i18next';
-import { translationValues } from 'pages/Registration/translation';
-
-i18next.use(initReactI18next).init({
-  lng: 'en',
-  debug: false,
-  resources: {
-    geo: {
-      translation: {
-        ...translationValues.geo,
-      },
-    },
-  },
-});
+import { useTranslation } from 'react-i18next';
 
 const Registration = () => {
   const { t } = useTranslation();
@@ -35,8 +22,38 @@ const Registration = () => {
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
+    setError,
   } = useForm<FormValues>({
     shouldFocusError: false,
+  });
+
+  const { requestFc: sentRequest } = usePostHttp({
+    obj: {
+      link: 'https://coronatime-api.devtest.ge/api/register',
+      body: {
+        username: getValues('username'),
+        email: getValues('email'),
+        password: getValues('password'),
+        repeatPassword: getValues('repeat_password'),
+        redirectOnConfirm: 'http://localhost:3000/confirmation',
+      },
+    },
+    applyData: (param: string) => {
+      return JSON.parse(param);
+    },
+    errorFc: (property) => {
+      if (property === 'username') {
+        setError('username', {
+          type: 'custom',
+          message: t('this username is already taken.'),
+        });
+      } else {
+        setError('email', {
+          type: 'custom',
+          message: t('this email is already taken.'),
+        });
+      }
+    },
   });
 
   const setErrorStyle = (
@@ -46,8 +63,9 @@ const Registration = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data: FormValues): void =>
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (): void => {
+    sentRequest();
+  };
   return (
     <div className="w-full h-full flex">
       <div className="w-3/5 h-full pt-2">
@@ -60,11 +78,11 @@ const Registration = () => {
           <div className="mt-1 text-[#808189]">
             {t('Please enter required info to sign up')}
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="w-4/6">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               label="username"
               className="mt-1 flex flex-col"
-              inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.username,
                 touchedFields.username
               )} outline-none`}
@@ -73,7 +91,7 @@ const Registration = () => {
               placeholder={t('Enter unique username')}
               register={register}
               validations={{
-                required: t('field is ampty'),
+                required: { value: true, message: t('field is ampty') },
                 minLength: {
                   value: 3,
                   message: t('username should be unique, min 3 symbols'),
@@ -92,8 +110,8 @@ const Registration = () => {
             </div>
             <Input
               label="email"
-              className="mt-1 flex flex-col"
-              inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              className="mt-5 flex flex-col"
+              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.email,
                 touchedFields.email
               )} outline-none`}
@@ -112,7 +130,7 @@ const Registration = () => {
             <Input
               label="password"
               className="mt-1 flex flex-col"
-              inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.password,
                 touchedFields.password
               )} outline-none`}
@@ -137,7 +155,7 @@ const Registration = () => {
             <Input
               label="repeat_password"
               className="mt-1 flex flex-col"
-              inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.repeat_password,
                 touchedFields.repeat_password
               )} outline-none`}
@@ -171,7 +189,7 @@ const Registration = () => {
                 validations={{}}
               />
             </div>
-            <Button type="submit" id="sign_up">
+            <Button type="submit" id="sign_up" className="w-4/6">
               {t('sign up')}
             </Button>
           </form>

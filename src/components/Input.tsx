@@ -11,7 +11,7 @@ interface propsObj {
   register: any;
   validations: object;
   correct?: boolean;
-  onChange?: () => {};
+  onChange?: Function;
   iconClass?: string;
 }
 
@@ -28,8 +28,8 @@ const Input: React.FC<propsObj> = (props) => {
           placeholder={props.placeholder}
           {...props.register(props.label, {
             ...props.validations,
+            onChange: props.onChange,
           })}
-          onChange={props.onChange}
           id={props.label}
         />
         {props.correct && (

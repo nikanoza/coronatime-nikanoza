@@ -2,25 +2,8 @@ import { Coronatime, Warning, Success } from 'assets/images';
 import { Input, Button } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
-import i18next from 'i18next';
-import { initReactI18next, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-
-i18next.use(initReactI18next).init({
-  lng: 'geo',
-  debug: false,
-  resources: {
-    geo: {
-      translation: {
-        'reset password': 'პაროლის აღდგენა',
-        email: 'ელ–ფოსტა',
-        'Enter your email': 'შეიყვანეთ ელ–ფოსტა',
-        'Email not found': 'ელ–ფოსტა ვერ მოიძებნა',
-        'We have sent you a confirmation email': 'შეამოწმეთ ელ–ფოსტა',
-      },
-    },
-  },
-});
 
 const Reset = () => {
   const [sentReq, setSentReq] = useState(false);
