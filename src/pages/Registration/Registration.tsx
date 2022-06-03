@@ -67,10 +67,12 @@ const Registration = () => {
     sentRequest();
   };
   return (
-    <div className="w-full h-full flex">
-      <div className="w-3/5 h-full pt-2">
-        <div className="ml-28 flex flex-col text-sm">
-          <div className="flex items-center justify-between pr-12">
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="h-full w-5/6 lg:w-3/5 pt-2 flex items-start justify-center">
+        <div
+          className="flex flex-col text-sm w-5/6 justify-between"
+        >
+          <div className="flex items-center justify-between 2xl:mt-10">
             <img src={Coronatime} alt="" className="" />
             <Language />
           </div>
@@ -78,13 +80,13 @@ const Registration = () => {
           <div className="mt-1 text-[#808189]">
             {t('Please enter required info to sign up')}
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-5">
             <Input
               label="username"
               className="mt-1 flex flex-col"
-              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.username,
-                touchedFields.username
+                touchedFields.username && getValues('username') !== ''
               )} outline-none`}
               text={t('username')}
               type="text"
@@ -97,7 +99,11 @@ const Registration = () => {
                   message: t('username should be unique, min 3 symbols'),
                 },
               }}
-              correct={!errors.username && touchedFields.username}
+              correct={
+                !errors.username &&
+                touchedFields.username &&
+                getValues('username') !== ''
+              }
               iconClass="w-4 h-4 -ml-6"
             />
             <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -110,17 +116,21 @@ const Registration = () => {
             </div>
             <Input
               label="email"
-              className="mt-5 flex flex-col"
-              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              className="mt-14 md:mt-6 flex flex-col"
+              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.email,
-                touchedFields.email
+                touchedFields.email && getValues('email') !== ''
               )} outline-none`}
               text={t('email')}
               type="email"
               placeholder={t('Enter your email')}
               register={register}
               validations={{ required: t('field is ampty') }}
-              correct={!errors.email && touchedFields.email}
+              correct={
+                !errors.email &&
+                touchedFields.email &&
+                getValues('email') !== ''
+              }
               iconClass="w-4 h-4 -ml-6"
             />
             <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -130,9 +140,9 @@ const Registration = () => {
             <Input
               label="password"
               className="mt-1 flex flex-col"
-              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.password,
-                touchedFields.password
+                touchedFields.password && getValues('password') !== ''
               )} outline-none`}
               text={t('password')}
               type="password"
@@ -145,7 +155,11 @@ const Registration = () => {
                   message: t('password should be unique, min 3 symbols'),
                 },
               }}
-              correct={!errors.password && touchedFields.password}
+              correct={
+                !errors.password &&
+                touchedFields.password &&
+                getValues('password') !== ''
+              }
               iconClass="w-4 h-4 -ml-6"
             />
             <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -155,13 +169,14 @@ const Registration = () => {
             <Input
               label="repeat_password"
               className="mt-1 flex flex-col"
-              inputClass={`w-4/6 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.repeat_password,
-                touchedFields.repeat_password
+                touchedFields.repeat_password &&
+                  getValues('repeat_password') !== ''
               )} outline-none`}
               text={t('reapeat password')}
               type="password"
-              placeholder="Repeat password"
+              placeholder={t('reapeat password')}
               register={register}
               validations={{
                 required: t('field is ampty'),
@@ -171,7 +186,11 @@ const Registration = () => {
                     t('password did not match'),
                 },
               }}
-              correct={!errors.repeat_password && touchedFields.repeat_password}
+              correct={
+                !errors.repeat_password &&
+                touchedFields.repeat_password &&
+                getValues('repeat_password') !== ''
+              }
               iconClass="w-4 h-4 -ml-6"
             />
             <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -189,13 +208,16 @@ const Registration = () => {
                 validations={{}}
               />
             </div>
-            <Button type="submit" id="sign_up" className="w-4/6">
+            <Button type="submit" id="sign_up" className="w-11/12 lg:w-1/2">
               {t('sign up')}
             </Button>
           </form>
-          <div className="flex mt-2 items-center w-3/5 justify-center">
+          <div className="flex mt-2 items-center w-11/12 justify-center lg:w-1/2">
             {t('Already have an account?')}
-            <Link to={'/login'} className="text-[#2029F3] ml-2">
+            <Link
+              to={'/login'}
+              className="text-[#2029F3] ml-2 whitespace-nowrap"
+            >
               {t('Log in')}
             </Link>
           </div>
