@@ -30,6 +30,7 @@ const usePostHttp = (param: RequestObject) => {
       param.applyData(data);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
+        console.log(err);
         const register = (err.response.data as ErrorType)[0].context.label;
         param.errorFc(register);
       }

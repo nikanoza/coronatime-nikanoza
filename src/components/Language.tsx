@@ -1,10 +1,12 @@
-import i18next from 'i18next';
 import { Eng, Geo } from 'assets/images';
+import i18next from 'i18next';
+import React from 'react';
 import Select from 'react-select';
 
-const Language = () => {
+const Language: React.FC<{ change: Function }> = (props) => {
+  const lenguage = i18next.language;
   const languageChangeHandler = (event: any) => {
-    i18next.changeLanguage(event.value);
+    props.change(event.value);
   };
 
   const options = [
@@ -31,10 +33,10 @@ const Language = () => {
       options={options}
       onChange={languageChangeHandler}
       defaultValue={{
-        value: 'en',
+        value: lenguage === 'en' ? 'en' : 'geo',
         label: (
           <div>
-            <img src={Eng} alt="" />
+            <img src={lenguage === 'en' ? Eng : Geo} alt="" />
           </div>
         ),
       }}

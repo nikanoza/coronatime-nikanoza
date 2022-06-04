@@ -34,6 +34,7 @@ const Translations: { geo: object } = {
     'Log in': 'შესვლა',
     'this email is already taken.': 'ეს მეილი უკვე გამოყენებულია',
     'this username is already taken.': 'ეს სახელი უკვე გამოყენებულია',
+    'reset password': 'პაროლის შეცვლა',
   },
 };
 export default Translations;
