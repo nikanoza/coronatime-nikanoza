@@ -35,6 +35,13 @@ const Translations: { geo: object } = {
     'this email is already taken.': 'ეს მეილი უკვე გამოყენებულია',
     'this username is already taken.': 'ეს სახელი უკვე გამოყენებულია',
     'reset password': 'პაროლის შეცვლა',
+    'Your account is confirmed, you can sign in':
+      'შენი ანგარიში ვერიფიცირებულია, შეგიძლია გაიარო ავტორიზაცია',
+    'verify email': 'ვერიფიკაცია',
+    'click this button to verify your email':
+      'ელ–ფოსტის დასადასტურებლად დააჭირე ღილაკს',
+    'Confirmation email': 'ელ–ფოსტის დადასტურება',
+    'sign in': 'შესვლა',
   },
 };
 export default Translations;

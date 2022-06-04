@@ -1,7 +1,7 @@
 import { Vaccines, Coronatime } from 'assets/images';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Warning } from 'assets/images';
 import { usePostHttp } from 'hooks';
 
@@ -18,6 +18,8 @@ const Registration: React.FC<{
     password: string;
     repeat_password: string;
   };
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -37,10 +39,11 @@ const Registration: React.FC<{
         email: getValues('email'),
         password: getValues('password'),
         repeatPassword: getValues('repeat_password'),
-        redirectOnConfirm: 'http://localhost:3000/confirmation',
+        redirectOnConfirm: 'http://localhost:3000/confirmation/',
       },
     },
     applyData: (param: string) => {
+      navigate('/confirmation');
       return JSON.parse(param);
     },
     errorFc: (property) => {

@@ -32,6 +32,7 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
       },
     },
     applyData: (param: string) => {
+      //add navigate
       return JSON.parse(param);
     },
     errorFc: (property) => {
@@ -51,8 +52,8 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
   };
   return (
     <div className="w-full h-full flex">
-      <div className="w-full h-full lg:w-3/5 pt-3 pb-3 items-center justify-center md:pt-10">
-        <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm lg:text-base">
+      <div className="w-full h-full lg:w-3/5 pt-3 pb-3 items-center justify-center">
+        <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm">
           <div className="flex items-center justify-between pr-12">
             <img src={Coronatime} alt="" className="" />
             <Language change={props.changeLenguage} />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Button: React.FunctionComponent<{
   type: any;
-  onClick?: () => {};
+  onClick?: () => void;
   id: string;
   className?: string;
   children: any;
