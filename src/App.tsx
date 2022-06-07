@@ -5,12 +5,16 @@ import {
   NewPassword,
   Confirmation,
   Recovery,
+  SentInfo,
+  Confirmed,
+  Dashboard,
 } from 'pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { Translations } from 'components';
+import { World, Country } from 'pages/Dashboard/Routes';
 
 i18next.use(initReactI18next).init({
   lng: 'en',
@@ -44,6 +48,16 @@ function App() {
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/recovery" element={<Recovery />} />
+        <Route path="/sent-info" element={<SentInfo />} />
+        <Route path="/confirmed" element={<Confirmed />} />
+        <Route
+          key="/dashboard"
+          path="/dashboard"
+          element={<Dashboard changeLenguage={changeLanguage} />}
+        >
+          <Route path="world" element={<World />} />
+          <Route key="country" path="country" element={<Country />} />
+        </Route>
       </Routes>
     </div>
   );

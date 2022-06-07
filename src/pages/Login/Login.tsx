@@ -1,12 +1,14 @@
 import { Vaccines, Coronatime, Warning } from 'assets/images';
 import { Input, Button, Language } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { usePostHttp } from 'hooks';
+import i18next from 'i18next';
 
 const Login: React.FC<{ changeLenguage: Function }> = (props) => {
+  console.log(i18next.language);
   type FormValues = {
     username: string;
     password: string;
@@ -22,7 +24,7 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
   });
 
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   const { requestFc: sentRequest } = usePostHttp({
     obj: {
       link: 'https://coronatime-api.devtest.ge/api/login',
@@ -32,7 +34,9 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
       },
     },
     applyData: (param: string) => {
-      //add navigate
+      const { token } = JSON.parse(param);
+      console.log(token);
+      navigate('/dashboard/world');
       return JSON.parse(param);
     },
     errorFc: (property) => {

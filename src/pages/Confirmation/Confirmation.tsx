@@ -1,8 +1,6 @@
 import { Dashboard } from 'assets/images';
 import { Button } from 'components';
 import { usePostHttp } from 'hooks';
-import i18next from 'i18next';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,7 +10,6 @@ const Confirmation = () => {
   const hash = params.get('hash');
 
   const { t } = useTranslation();
-  i18next.changeLanguage('geo');
 
   const navigate = useNavigate();
 
@@ -24,12 +21,10 @@ const Confirmation = () => {
       },
     },
     applyData: (param: string) => {
-      navigate('/after-confirm');
+      navigate('/confirmed');
       return JSON.parse(param);
     },
-    errorFc: (property) => {
-      console.log(property);
-    },
+    errorFc: (property) => {},
   });
 
   const verify = () => sentRequest();

@@ -1,5 +1,6 @@
 import { Coronatime, Success, Warning } from 'assets/images';
 import { Button, Input } from 'components';
+import i18next from 'i18next';
 import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,6 +10,7 @@ const NewPassword = () => {
   const [sentReq, setSentReq] = useState(false);
 
   const { t } = useTranslation();
+  i18next.changeLanguage('geo');
 
   type FormsValues = {
     new_password: string;
@@ -39,7 +41,10 @@ const NewPassword = () => {
         </div>
       )}
       {!sentReq && (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-2/5 text-sm">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-4/5 text-sm md:w-1/2 lg:w-1/3"
+        >
           <Input
             label="new_password"
             text={t('new password')}
@@ -91,7 +96,7 @@ const NewPassword = () => {
             {errors.repeat_password && <img src={Warning} alt="" />}
             {errors.repeat_password && errors.repeat_password.message}
           </div>
-          <Button type="submit" id="save_new_password_btn">
+          <Button type="submit" id="save_new_password_btn" className="w-full">
             {t('save changes')}
           </Button>
         </form>

@@ -4,3 +4,6 @@ export { default as Reset } from './Reset';
 export { default as NewPassword } from './NewPassword';
 export { default as Confirmation } from './Confirmation';
 export { default as Recovery } from './Recovery';
+export { default as SentInfo } from './SentInfo';
+export { default as Confirmed } from './Confirmed';
+export { default as Dashboard } from './Dashboard';

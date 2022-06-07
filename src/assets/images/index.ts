@@ -6,3 +6,8 @@ export { default as Eng } from './eng.png';
 export { default as Geo } from './geo.png';
 export { default as Success } from './success.png';
 export { default as Dashboard } from './dashboard.png';
+export { default as Death } from './death.png';
+export { default as Recovered } from './recovered.png';
+export { default as Cases } from './cases.png';
+export { default as Search } from './search.png';
+export { default as Arrow } from './arrow.png';

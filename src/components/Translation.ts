@@ -42,6 +42,25 @@ const Translations: { geo: object } = {
       'ელ–ფოსტის დასადასტურებლად დააჭირე ღილაკს',
     'Confirmation email': 'ელ–ფოსტის დადასტურება',
     'sign in': 'შესვლა',
+    'We have sent you a confirmation email':
+      'შენს ელ–ფოსტაზე წერილი ვაფრინეთ, შეამოწმე',
+    'new password': 'ახალი პაროლი',
+    'Enter new password': 'შეიყვანეთ ახალი პაროლი',
+    'Repeat password': 'გაიმეორეთ პაროლი',
+    'save changes': 'ცვლილების შენახვა',
+    'recover password': 'პაროლის აღდგენა',
+    'click this button to recover a password':
+      'პაროლის აღდგენისთვის დააჭირე ღილაკს',
+    'log out': 'გასვლა',
+    'Statistics by country': 'სტატისტიკა ქვეყნების მიხედვით',
+    'Worldwide Statistics': 'მსოფლიო სტატისტიკა',
+    Worldwide: 'მსოფლიო',
+    'By country': 'ქვეყნების',
+    location: 'ქვეყანა',
+    'new cases': 'ახალი შემთხვევები',
+    death: 'გარდაცვლილები',
+    recovered: 'გამოჯანმრთელებულები',
+    'Search by country': 'ძიება ქვეყნების მიხედვით',
   },
 };
 export default Translations;

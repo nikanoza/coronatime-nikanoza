@@ -39,11 +39,11 @@ const Registration: React.FC<{
         email: getValues('email'),
         password: getValues('password'),
         repeatPassword: getValues('repeat_password'),
-        redirectOnConfirm: 'http://localhost:3000/confirmation/',
+        redirectOnConfirm: 'http://localhost:3000/confirmation',
       },
     },
     applyData: (param: string) => {
-      navigate('/confirmation');
+      navigate('/sent-info');
       return JSON.parse(param);
     },
     errorFc: (property) => {
