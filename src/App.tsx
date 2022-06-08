@@ -10,21 +10,16 @@ import {
   Dashboard,
 } from 'pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
+import { World, Country } from 'pages/Dashboard/Routes';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { Translations } from 'components';
-import { World, Country } from 'pages/Dashboard/Routes';
+import common_geo from 'locals/geo.json';
 
 i18next.use(initReactI18next).init({
-  lng: 'en',
+  fallbackLng: 'en',
   debug: false,
   resources: {
-    geo: {
-      translation: {
-        ...Translations.geo,
-      },
-    },
+    geo: { translation: common_geo },
   },
 });
 
