@@ -37,7 +37,8 @@ const Registration = () => {
         email: getValues('email'),
         password: getValues('password'),
         repeatPassword: getValues('repeat_password'),
-        redirectOnConfirm: 'http://localhost:3000/confirmation',
+        redirectOnConfirm:
+          'https://coronatime.nika-nozadze.redberryinternship.ge/confirmation',
       },
     },
     applyData: (param: string) => {

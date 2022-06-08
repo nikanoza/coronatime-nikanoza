@@ -108,7 +108,7 @@ const Country = () => {
   };
 
   return (
-    <div className="h-1/3">
+    <div className="h-1/3 text-xs md:text-base">
       <input
         type="text"
         placeholder={t('Search by country')}

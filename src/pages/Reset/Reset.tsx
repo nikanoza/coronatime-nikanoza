@@ -27,7 +27,8 @@ const Reset = () => {
       link: 'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
       body: {
         email: getValues('email'),
-        backlink: 'http://localhost:3000/new-password',
+        backlink:
+          'https://coronatime.nika-nozadze.redberryinternship.ge/new-password',
       },
     },
     applyData: (param: string) => {

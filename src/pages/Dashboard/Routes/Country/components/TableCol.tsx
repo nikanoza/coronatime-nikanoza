@@ -6,7 +6,7 @@ const TableCol: React.FC<{
   sortDsc: () => void;
 }> = (props) => {
   return (
-    <div className="flex pt-5 pb-5 pl-8 pr-8 items-center justify-center gap-3 bg-[#F6F6F7]">
+    <div className="flex items-center justify-center text-center gap-1 md:gap-3 bg-[#F6F6F7] md:pt-5 md:pb-5 md:pl-8 md:pr-8 ">
       <div className="text-semibold capitalize">{props.text}</div>
       <div className="flex flex-col items-center justify-center gap-1">
         <button onClick={props.sortDsc}>
