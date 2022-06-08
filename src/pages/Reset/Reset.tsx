@@ -31,7 +31,7 @@ const Reset = () => {
       },
     },
     applyData: (param: string) => {
-      navigate('');
+      navigate('/sent-info');
       return JSON.parse(param);
     },
     errorFc: (property) => {

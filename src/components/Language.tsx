@@ -3,10 +3,11 @@ import i18next from 'i18next';
 import React from 'react';
 import Select from 'react-select';
 
-const Language: React.FC<{ change: Function }> = (props) => {
+const Language = () => {
   const lenguage = i18next.language;
   const languageChangeHandler = (event: any) => {
-    props.change(event.value);
+    localStorage.setItem('language', event.value);
+    i18next.changeLanguage(event.value);
   };
 
   const options = [

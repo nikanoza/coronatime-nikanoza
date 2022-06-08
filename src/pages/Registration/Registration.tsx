@@ -7,9 +7,7 @@ import { usePostHttp } from 'hooks';
 
 import { useTranslation } from 'react-i18next';
 
-const Registration: React.FC<{
-  changeLenguage: Function;
-}> = (props) => {
+const Registration = () => {
   const { t } = useTranslation();
 
   type FormValues = {
@@ -77,7 +75,7 @@ const Registration: React.FC<{
         <div className="flex flex-col text-sm w-5/6 justify-between">
           <div className="flex items-center justify-between 2xl:mt-10">
             <img src={Coronatime} alt="" className="" />
-            <Language change={props.changeLenguage} />
+            <Language />
           </div>
           <div className="mt-1 font-bold">{t('')}</div>
           <div className="mt-1 text-[#808189]">

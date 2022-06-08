@@ -30,9 +30,14 @@ const usePostHttp = (param: RequestObject) => {
       param.applyData(data);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
-        console.log(err);
-        const register = (err.response.data as ErrorType)[0].context.label;
-        param.errorFc(register);
+        const error = err.response.data as ErrorType;
+        console.log(error);
+        const register =
+          error[0] && error[0].hasOwnProperty('context')
+            ? +error[0].context.label
+            : '';
+        console.log(register);
+        param.errorFc(register + '');
       }
     }
   };

@@ -26,9 +26,13 @@ const Country = () => {
   const { t } = useTranslation();
   const [statistics, setStatistics] = useState([]);
   const [statisticsClone, setStatisticsClone] = useState([]);
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRvbm92YW5pIiwiZW1haWwiOiJkb25vdmFuaXNhbUBnbWFpbC5jb20iLCJpYXQiOjE2NTQ1MDcxODJ9.NXyZJb-5-nKQCmBH9XTZTg3EwizZI_-x6IDn3m0PVV4';
-  setTimeout(() => console.log(1), 20000);
+  let token = localStorage.getItem('token');
+  useEffect(() => {
+    const storagestatistics = localStorage.getItem('statistics');
+    if (storagestatistics) {
+      setStatistics(JSON.parse(storagestatistics));
+    }
+  }, []);
   const getStatistic = async () => {
     try {
       const response = await axios.get(
@@ -40,6 +44,7 @@ const Country = () => {
           },
         }
       );
+      localStorage.setItem('statistics', JSON.stringify(response.data));
       setStatistics(response.data);
       setStatisticsClone(response.data);
     } catch (error) {
@@ -57,7 +62,7 @@ const Country = () => {
       getStatistic();
       firstly = false;
     }
-  }, []);
+  });
 
   const sortNameAsc = () => {
     const newArray = statistics
@@ -103,11 +108,11 @@ const Country = () => {
   };
 
   return (
-    <div className="h-1/2">
+    <div className="h-1/3">
       <input
         type="text"
         placeholder={t('Search by country')}
-        className="border rounded-md pt-3 pb-3 pl-6 mt-10 w-1/4"
+        className="border rounded-md pt-3 pb-3 pl-6 mt-10 md:w-1/4"
         onChange={countryFilterHandler}
       />
       <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full">
@@ -137,16 +142,16 @@ const Country = () => {
           {statistics.length > 0 &&
             statisticsClone.map((country: CountryType, index) => (
               <div key={index} className="grid grid-cols-4">
-                <div className="flex pt-5 pb-5 pl-8 pr-8 items-center justify-center border-b whitespace-nowrap">
+                <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
                   {language === 'en' ? country.name.en : country.name.ka}
                 </div>
-                <div className="flex pt-5 pb-5 pl-8 pr-8 items-center justify-center border-b">
+                <div className="flex items-center justify-center border-b">
                   {country.statistics.confirmed}
                 </div>
-                <div className="flex pt-5 pb-5 pl-8 pr-8 items-center justify-center border-b">
+                <div className="flex items-center justify-center border-b">
                   {country.statistics.deaths}
                 </div>
-                <div className="flex pt-5 pb-5 pl-8 pr-8 items-center justify-center border-b">
+                <div className="flex items-center justify-center border-b">
                   {country.statistics.recovered}
                 </div>
               </div>

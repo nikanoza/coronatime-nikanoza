@@ -5,10 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { usePostHttp } from 'hooks';
-import i18next from 'i18next';
 
-const Login: React.FC<{ changeLenguage: Function }> = (props) => {
-  console.log(i18next.language);
+const Login = () => {
   type FormValues = {
     username: string;
     password: string;
@@ -19,6 +17,7 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
+    setError,
   } = useForm<FormValues>({
     shouldFocusError: false,
   });
@@ -35,12 +34,26 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
     },
     applyData: (param: string) => {
       const { token } = JSON.parse(param);
-      console.log(token);
+      localStorage.setItem('token', token);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          login: true,
+          username: getValues('username'),
+        })
+      );
       navigate('/dashboard/world');
       return JSON.parse(param);
     },
     errorFc: (property) => {
-      console.log(property);
+      setError('password', {
+        type: 'custom',
+        message: t('please, provide correct credentials...'),
+      });
+      setError('username', {
+        type: 'custom',
+        message: t('please, provide correct credentials...'),
+      });
     },
   });
 
@@ -60,7 +73,7 @@ const Login: React.FC<{ changeLenguage: Function }> = (props) => {
         <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm">
           <div className="flex items-center justify-between pr-12">
             <img src={Coronatime} alt="" className="" />
-            <Language change={props.changeLenguage} />
+            <Language />
           </div>
           <div className="mt-5 font-black">{t('Welcome back')}</div>
           <div className="mt-2 text-[#808189]">

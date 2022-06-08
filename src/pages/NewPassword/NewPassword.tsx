@@ -1,16 +1,19 @@
 import { Coronatime, Success, Warning } from 'assets/images';
 import { Button, Input } from 'components';
-import i18next from 'i18next';
+import { usePostHttp } from 'hooks';
 import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 const NewPassword = () => {
   const [sentReq, setSentReq] = useState(false);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const hash = params.get('hash');
 
   const { t } = useTranslation();
-  i18next.changeLanguage('geo');
 
   type FormsValues = {
     new_password: string;
@@ -21,9 +24,28 @@ const NewPassword = () => {
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
+    setError,
   } = useForm<FormsValues>();
-  const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void =>
-    setSentReq(true);
+
+  const { requestFc: sentRequest } = usePostHttp({
+    obj: {
+      link: 'https://coronatime-api.devtest.ge/api/password/recover',
+      body: {
+        hash: hash,
+        password: getValues('new_password'),
+        repeatPassword: getValues('repeat_password'),
+      },
+    },
+    applyData: (param: string) => {
+      return JSON.parse(param);
+    },
+    errorFc: () => {
+      setError('new_password', {
+        type: 'custom',
+        message: t('invalid data provided.'),
+      });
+    },
+  });
 
   const setErrorStyle = (
     error: FieldError | undefined,
@@ -32,6 +54,10 @@ const NewPassword = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
+  const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void => {
+    sentRequest();
+    setSentReq(true);
+  };
   return (
     <div className="flex flex-col w-full h-full justify-start items-center">
       <img src={Coronatime} alt="" className="mt-5" />
