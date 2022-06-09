@@ -14,6 +14,7 @@
     "@typescript-eslint/parser": "^5.27.0",
     "axios": "^0.27.2",
     "echarts": "^5.3.2",
+    "eslint-plugin-cypress": "^2.12.1",
     "i18next": "^21.8.5",
     "i18next-chained-backend": "^3.0.2",
     "i18next-http-backend": "^1.4.1",
@@ -29,7 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -47,9 +48,15 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
+    "@cypress/instrument-cra": "^1.4.0",
+    "babel-plugin-istanbul": "^6.1.1",
+    "cypress": "^10.0.3",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "istanbul-lib-coverage": "^3.2.0",
+    "nyc": "^15.1.0",
     "prettier": "2.6.2",
     "tailwindcss": "^3.0.24"
   }

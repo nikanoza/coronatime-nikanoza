@@ -1,6 +1,5 @@
 import { Eng, Geo } from 'assets/images';
 import i18next from 'i18next';
-import React from 'react';
 import Select from 'react-select';
 
 const Language = () => {
