@@ -14,14 +14,14 @@
 
 # Prerequisites
 
-<img src="readme/nodejs.png" width="25" style="top: 8px" /> *Node JS @16.X and up*
-<img src="readme/npm.png" width="25" style="top: 8px" /> *npm @8 and up*
-<img src="readme/typescript.png" width="25" style="top: 8px" /> *typescript @4 and up*
+* <img src="readme/nodejs.png" width="25" style="top: 8px" /> *Node JS @16.X and up*
+* <img src="readme/npm.png" width="25" style="top: 8px" /> *npm @8 and up*
+* <img src="readme/typescript.png" width="25" style="top: 8px" /> *typescript @4 and up*
 
 # Tech Stack
 
-<img src="readme/react.png" width="25" style="top: 8px" /> *React @ 18.0.0 - front-end framework*
-<img src="readme/i18next.png" width="25" style="top: 8px" /> *i18next @21.8.5 - library for translation*
+* <img src="readme/react.png" width="25" style="top: 8px" /> *React @ 18.0.0 - front-end framework*
+* <img src="readme/i18next.png" width="25" style="top: 8px" /> *i18next @21.8.5 - library for translation*
 
 # Getting Started
 ## 1. First of all you need to clone app repository from github:
