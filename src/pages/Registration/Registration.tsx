@@ -219,6 +219,7 @@ const Registration = () => {
             <Link
               to={'/login'}
               className="text-[#2029F3] ml-2 whitespace-nowrap"
+              id="sign_btn"
             >
               {t('Log in')}
             </Link>

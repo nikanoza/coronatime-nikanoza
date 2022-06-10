@@ -21,7 +21,7 @@ const Language = () => {
     {
       value: 'geo',
       label: (
-        <div>
+        <div id="geo">
           <img src={Geo} alt="" />
         </div>
       ),

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 const NewPassword = () => {
-  const [sentReq, setSentReq] = useState(false);
+  const [sentReq, setSentReq] = useState(true);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const hash = params.get('hash');
@@ -37,6 +37,7 @@ const NewPassword = () => {
       },
     },
     applyData: (param: string) => {
+      setSentReq(true);
       return JSON.parse(param);
     },
     errorFc: () => {
@@ -56,7 +57,6 @@ const NewPassword = () => {
 
   const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void => {
     sentRequest();
-    setSentReq(true);
   };
   return (
     <div className="flex flex-col w-full h-full justify-start items-center">
@@ -76,7 +76,7 @@ const NewPassword = () => {
             text={t('new password')}
             inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
               errors.new_password,
-              touchedFields.new_password
+              touchedFields.new_password && getValues('new_password') !== ''
             )} outline-none`}
             className="w-full mt-2 flex flex-col"
             type="password"
@@ -89,7 +89,11 @@ const NewPassword = () => {
                 message: t('Password should be unique, min 3 symbols'),
               },
             }}
-            correct={!errors.new_password && touchedFields.new_password}
+            correct={
+              !errors.new_password &&
+              touchedFields.new_password &&
+              getValues('new_password') !== ''
+            }
             iconClass="w-4 h-4 -ml-6"
           />
           <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -101,7 +105,8 @@ const NewPassword = () => {
             className="mt-1 flex flex-col"
             inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
               errors.repeat_password,
-              touchedFields.repeat_password
+              touchedFields.repeat_password &&
+                getValues('repeat_password') !== ''
             )} outline-none`}
             text={t('reapeat password')}
             type="password"
@@ -115,7 +120,11 @@ const NewPassword = () => {
                   t('password did not match'),
               },
             }}
-            correct={!errors.repeat_password && touchedFields.repeat_password}
+            correct={
+              !errors.repeat_password &&
+              touchedFields.repeat_password &&
+              getValues('repeat_password') !== ''
+            }
             iconClass="w-4 h-4 -ml-6"
           />
           <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
@@ -128,10 +137,10 @@ const NewPassword = () => {
         </form>
       )}
       {sentReq && (
-        <div className="flex flex-col items-center justify-center mt-20">
+        <div className="flex flex-col items-center justify-center text-center h-4/6">
           <img src={Success} alt="" />
           <div>{t('Your password has been updeted successfully')}</div>
-          <Button type="button" id="save_new_password_btn">
+          <Button type="button" id="save_new_password_btn" className="w-5/6">
             {t('sign in')}
           </Button>
         </div>

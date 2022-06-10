@@ -142,7 +142,11 @@ const Login = () => {
                 register={register}
                 validations={{ require: false }}
               />
-              <Link to={'/reset'} className="text-[#2029F3] whitespace-nowrap">
+              <Link
+                to={'/reset'}
+                className="text-[#2029F3] whitespace-nowrap"
+                id="reset_password_btn"
+              >
                 {t('Forgot password?')}
               </Link>
             </div>

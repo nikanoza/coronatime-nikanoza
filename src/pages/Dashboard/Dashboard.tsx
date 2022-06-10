@@ -55,7 +55,7 @@ const Dashboard = () => {
           className={`flex ${!collapseMenu ? 'hidden' : ''} lg:hidden`}
           onClick={toggleMenu}
         >
-          <div className="space-y-2">
+          <div className="space-y-2" id="h-menu">
             <span className="block w-8 h-0.5 bg-gray-600 animate-pulse"></span>
             <span className="block w-8 h-0.5 bg-gray-600 animate-pulse"></span>
             <span className="block w-8 h-0.5 bg-gray-600 animate-pulse"></span>
@@ -81,6 +81,7 @@ const Dashboard = () => {
           {t('Worldwide')}
         </NavLink>
         <NavLink
+          id="country_btn"
           to={'/dashboard/country'}
           className={(link: any) => {
             return `${

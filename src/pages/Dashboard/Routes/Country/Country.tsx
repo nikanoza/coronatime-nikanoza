@@ -51,9 +51,6 @@ const Country = () => {
       if (axios.isAxiosError(error)) {
         console.log('error message: ', error.message);
         return error.message;
-      } else {
-        console.log('unexpected error: ', error);
-        return 'An unexpected error occurred';
       }
     }
   };
@@ -121,21 +118,25 @@ const Country = () => {
             text={t('location')}
             sortAsc={sortNameAsc}
             sortDsc={sortNameDsc}
+            btnIds={{ asc: 'name_asc', dsc: 'name_dsc' }}
           />
           <TableCol
             text={t('new cases')}
             sortAsc={() => sortationFc('confirmed', true)}
             sortDsc={() => sortationFc('confirmed', false)}
+            btnIds={{ asc: 'cases_asc', dsc: 'cases_dsc' }}
           />
           <TableCol
             text={t('death')}
             sortAsc={() => sortationFc('deaths', true)}
             sortDsc={() => sortationFc('deaths', false)}
+            btnIds={{ asc: 'death_asc', dsc: 'death_dsc' }}
           />
           <TableCol
             text={t('recovered')}
             sortAsc={() => sortationFc('recovered', true)}
             sortDsc={() => sortationFc('recovered', false)}
+            btnIds={{ asc: 'recovered_asc', dsc: 'recovered_dsc' }}
           />
         </div>
         <div className="mt-2 w-full h-full overflow-y-scroll">
