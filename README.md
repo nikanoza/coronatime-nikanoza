@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+![This is header image](/src/assets/images/coronatime.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Coronatime App
 
-## Available Scripts
+## Coronatime is app, which display countries covid statistics for authorized users.
 
-In the project directory, you can run:
+# Table of Contents
+## [Prerequisites](#Prerequisites)
+## [Tech Stack](#Tech-Stack)
+## [Getting Started](#Getting-Started)
+## [Project Structure](#Project-Structure)
+## [Resources](#Resources)
+## [Testing](#Testing)
 
-### `npm start`
+# Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img src="readme/nodejs.png" width="25" style="top: 8px" /> *Node JS @16.X and up*
+<img src="readme/npm.png" width="25" style="top: 8px" /> *npm @8 and up*
+<img src="readme/typescript.png" width="25" style="top: 8px" /> *typescript @4 and up*
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Tech Stack
 
-### `npm test`
+<img src="readme/react.png" width="25" style="top: 8px" /> *React @ 18.0.0 - front-end framework*
+<img src="readme/i18next.png" width="25" style="top: 8px" /> *i18next @21.8.5 - library for translation*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Getting Started
+## 1. First of all you need to clone app repository from github:
+```
+git clone https://github.com/RedberryInternship/covid19-nikanoza
+```
+## 2. Next step requires install all the dependencies.
 
-### `npm run build`
+```
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+|--- src
+|   |--- assets # project images
+|   |--- components # reusable components
+|   |---|--- index.js # export all components
+|   |--- pages # all page components
+|   |---|--- page-folder # page folder name
+|   |---|---|--- page-name.js # react component
+|   |---|---|--- index.js # export default component
+|   |---|--- index.js # export all pages
+|   |--- hooks # custom hooks
+|   |--- locals # translation files
+- .eslintrc.json  # eslint config file
+- .prettierrc.js  # prettier config file
+- tailwind.config.js # tailwind config file
+- package.json     # dependency manager configurations
+```
+# Testing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## For testing we are using Cypress. You can see all testing files on Cypres e2e subfolder.
+```
+cypress/e2e
+```
+## If you want to see test in action, you need install cypress first
 
-### `npm run eject`
+```
+npm install cypress --save-dev
+```
+## then open Cypress
+```
+npx cypress open
+``` 
+## [More information about Cypress](https://www.cypress.io)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Resources
+## This site was built using [figma](https://www.figma.com/file/O9A950iYrHgZHtBuCtNSY8/Coronatime?node-id=0%3A1).
+## [Api documentation](https://coronatime-api.devtest.ge/)
+## [github commit rules](https://redberry.gitbook.io/resources/git-is-semantikuri-komitebi)

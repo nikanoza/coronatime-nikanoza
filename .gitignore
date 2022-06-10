@@ -8,7 +8,6 @@
 
 # testing
 /coverage
-cypress.json
 .nyc_output
 
 # production
