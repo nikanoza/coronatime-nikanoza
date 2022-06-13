@@ -5,39 +5,13 @@ describe('login page testing', () => {
     cy.visit('/dashboard/country');
   });
   it('country statistic is loaded', () => {
-    cy.intercept('GET', Cypress.env('api_server') + 'countries/', {
-      statusCode: 200,
-      body: [
-        {
-          code: 'AF',
-          name: {
-            en: 'Afghanistan',
-            ka: 'ავღანეთი',
-          },
-          statistics: {
-            confirmed: 1234,
-            critical: 1234,
-            deaths: 1234,
-            recovered: 1234,
-          },
-          id: '628360785af42d12eef05c44',
-        },
-        {
-          code: 'AL',
-          name: {
-            en: 'Albania',
-            ka: 'ალბანეთი',
-          },
-          statistics: {
-            confirmed: 3224,
-            critical: 3454,
-            deaths: 1111,
-            recovered: 1023,
-          },
-          id: '628360785af42d12eef05c45',
-        },
-      ],
+    cy.fixture('countries').then((json) => {
+      cy.intercept('GET', Cypress.env('api_server') + 'countries/', {
+        statusCode: 200,
+        body: json.countries,
+      });
     });
+
     /* eslint-disable cypress/no-unnecessary-waiting */
     cy.wait(5000).should(() => {
       expect(
