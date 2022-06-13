@@ -91,6 +91,6 @@ after this you can use this file to deploy project on server.
 
 #
 ### Resources
-[figma](https://www.figma.com/file/O9A950iYrHgZHtBuCtNSY8/Coronatime?node-id=0%3A1).
-[Api documentation](https://coronatime-api.devtest.ge/)
-[github commit rules](https://redberry.gitbook.io/resources/git-is-semantikuri-komitebi)
+* [figma](https://www.figma.com/file/O9A950iYrHgZHtBuCtNSY8/Coronatime?node-id=0%3A1).
+* [Api documentation](https://coronatime-api.devtest.ge/)
+* [github commit rules](https://redberry.gitbook.io/resources/git-is-semantikuri-komitebi)
