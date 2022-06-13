@@ -2,7 +2,7 @@
 
 describe('login page testing', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/registration');
+    cy.visit('/registration');
   });
 
   it('user can navigate to login page', () => {
@@ -22,7 +22,7 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/register', {
+    cy.intercept('POST', Cypress.env('api_server') + 'register', {
       statusCode: 422,
       body: [
         {
@@ -46,7 +46,7 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/register', {
+    cy.intercept('POST', Cypress.env('api_server') + 'register', {
       statusCode: 422,
       body: [
         {
@@ -70,13 +70,10 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/register', {
+    cy.intercept('POST', Cypress.env('api_server') + 'register', {
       statusCode: 201,
     });
     cy.get('[id="sign_up"]').click();
     cy.url().should('include', 'sent-info');
   });
 });
-
-// sign_up
-// sent-info

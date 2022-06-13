@@ -9,9 +9,9 @@ Coronatime is app, which display countries covid statistics for authorized users
 * [Tech Stack](#Tech-Stack)
 * [Getting Started](#Getting-Started)
 * [Project Structure](#Project-Structure)
-* [Resources](#Resources)
 * [Testing](#Testing)
 * [Deployment](#Deployment)
+* [Resources](#Resources)
 
 #
 ### Prerequisites
@@ -35,7 +35,7 @@ Coronatime is app, which display countries covid statistics for authorized users
 ### Getting Started
 1. First of all you need to clone app repository from github:
 ```
-git clone https://github.com/RedberryInternship/covid19-nikanoza
+git clone https://github.com/RedberryInternship/coronatime-nikanoza.git
 ```
 2. Next step requires install all the dependencies.
 

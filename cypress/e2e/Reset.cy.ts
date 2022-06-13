@@ -2,13 +2,13 @@
 
 describe('login page testing', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/reset');
+    cy.visit('/reset');
   });
 
   it('user can sent if email found in database', () => {
     cy.intercept(
       'POST',
-      'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
+      Cypress.env('api_server') + 'password/send-recovery-link',
       {
         statusCode: 200,
       }
@@ -21,7 +21,7 @@ describe('login page testing', () => {
   it('user can not sent request if email not found', () => {
     cy.intercept(
       'POST',
-      'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
+      Cypress.env('api_server') + 'password/send-recovery-link',
       {
         statusCode: 403,
       }

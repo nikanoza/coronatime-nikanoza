@@ -2,7 +2,7 @@
 
 describe('login page testing', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/login');
+    cy.visit('/login');
   });
   it('not allow to push button', () => {
     cy.get('[id="login_btn"]').click();
@@ -28,7 +28,7 @@ describe('login page testing', () => {
   it('user can login if enter valid data', () => {
     cy.get('[id="username"]').type('donovani');
     cy.get('[id="password"]').type('1234567');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/login', {
+    cy.intercept('POST', Cypress.env('api_server') + 'login', {
       statusCode: 200,
       body: {
         token:
@@ -42,7 +42,7 @@ describe('login page testing', () => {
   it('user can not login if enter incorect username or password', () => {
     cy.get('[id="username"]').type('donovani');
     cy.get('[id="password"]').type('123456');
-    cy.intercept('POST', 'https://coronatime-api.devtest.ge/api/login', {
+    cy.intercept('POST', Cypress.env('api_server') + 'login', {
       statusCode: 401,
     });
     cy.get('[id="login_btn"]').click();

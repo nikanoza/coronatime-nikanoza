@@ -2,10 +2,10 @@
 
 describe('login page testing', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/dashboard/country');
+    cy.visit('/dashboard/country');
   });
   it('country statistic is loaded', () => {
-    cy.intercept('GET', 'https://coronatime-api.devtest.ge/api/countries/', {
+    cy.intercept('GET', Cypress.env('api_server') + 'countries/', {
       statusCode: 200,
       body: [
         {
@@ -62,7 +62,7 @@ describe('login page testing', () => {
     cy.reload();
   });
   it('check request error', () => {
-    cy.intercept('GET', 'https://coronatime-api.devtest.ge/api/countries/').as(
+    cy.intercept('GET', Cypress.env('api_server') + 'countries/').as(
       'getCountries'
     );
     cy.wait('@getCountries')
