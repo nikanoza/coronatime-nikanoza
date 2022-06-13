@@ -8,7 +8,7 @@ describe('login page testing', () => {
   });
 
   it('user can not update password if enter data is invalid', () => {
-    cy.intercept('POST', Cypress.env('api_server') + 'recover', {
+    cy.intercept('POST', Cypress.env('api_server') + 'password/recover', {
       statusCode: 422,
     });
     cy.get('[id="new_password"]').type('1234');
@@ -17,7 +17,7 @@ describe('login page testing', () => {
     cy.contains('invalid data provided.');
   });
   it('user can change password if all data is valid', () => {
-    cy.intercept('POST', Cypress.env('api_server') + 'recover', {
+    cy.intercept('POST', Cypress.env('api_server') + 'password/recover', {
       statusCode: 200,
     });
     cy.get('[id="new_password"]').type('1234');

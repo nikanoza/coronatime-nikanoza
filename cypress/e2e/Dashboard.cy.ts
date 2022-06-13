@@ -40,9 +40,9 @@ describe('login page testing', () => {
     });
     /* eslint-disable cypress/no-unnecessary-waiting */
     cy.wait(5000).should(() => {
-      expect(JSON.parse(localStorage.getItem('statistics'))[0].code).to.eq(
-        'AF'
-      );
+      expect(
+        JSON.parse(localStorage.getItem('statistics') || '')[0].code
+      ).to.eq('AF');
     });
     cy.get('[id="name_asc"]').click();
     cy.get('[id="name_dsc"]').click();
