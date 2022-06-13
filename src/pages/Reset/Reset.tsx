@@ -1,4 +1,4 @@
-import { Coronatime, Warning } from 'assets/images';
+import { Coronatime, Warning } from 'assets';
 import { Input, Button } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -57,7 +57,7 @@ const Reset = () => {
   return (
     <div className="flex flex-col w-full h-full justify-start items-center xl:text-lg">
       <img src={Coronatime} alt="" className="mt-5" />
-      <div className="font-bold text-lg mt-10 capitalize">
+      <div className="font-bold text-lg mt-10 capitalize md:mt-36">
         {t('reset password')}
       </div>
       <form
@@ -67,7 +67,7 @@ const Reset = () => {
         <Input
           label="email"
           text={t('email')}
-          inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+          inputClass={`w-full pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
             errors.email,
             touchedFields.email && getValues('email') !== ''
           )} outline-none`}

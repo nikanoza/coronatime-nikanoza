@@ -1,4 +1,4 @@
-import { Coronatime, Success } from 'assets/images';
+import { Coronatime, Success } from 'assets';
 import { useTranslation } from 'react-i18next';
 
 const SentInfo = () => {

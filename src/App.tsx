@@ -10,7 +10,7 @@ import {
   Dashboard,
 } from 'pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { World, Country } from 'pages/Dashboard/Routes';
+import { World, Country } from 'pages/Dashboard';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import common_geo from 'locales/geo.json';

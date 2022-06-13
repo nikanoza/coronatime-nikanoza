@@ -1,5 +1,5 @@
-import { Cases, Death, Recovered } from 'assets/images';
-import { Statistic } from 'pages/Dashboard/Routes/World/components';
+import { Cases, Death, Recovered } from 'assets';
+import { Statistic } from 'pages/Dashboard/World/components';
 import { useTranslation } from 'react-i18next';
 
 const World = () => {

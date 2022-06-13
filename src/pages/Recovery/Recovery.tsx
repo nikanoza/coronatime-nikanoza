@@ -1,4 +1,4 @@
-import { Dashboard } from 'assets/images';
+import { Dashboard } from 'assets';
 import { Button } from 'components';
 import { useTranslation } from 'react-i18next';
 

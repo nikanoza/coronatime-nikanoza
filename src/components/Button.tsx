@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-const Button: React.FunctionComponent<{
+const Button: React.FC<{
   type: any;
   onClick?: () => void;
   id: string;
   className?: string;
-  children: any;
+  children: ReactNode;
 }> = (props) => {
   return (
     <button

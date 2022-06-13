@@ -1,9 +1,9 @@
-import { Eng, Geo } from 'assets/images';
+import { Eng, Geo } from 'assets';
 import i18next from 'i18next';
 import Select from 'react-select';
 
 const Language = () => {
-  const lenguage = i18next.language;
+  const language = i18next.language;
   const languageChangeHandler = (event: any) => {
     localStorage.setItem('language', event.value);
     i18next.changeLanguage(event.value);
@@ -33,10 +33,10 @@ const Language = () => {
       options={options}
       onChange={languageChangeHandler}
       defaultValue={{
-        value: lenguage === 'en' ? 'en' : 'geo',
+        value: language === 'en' ? 'en' : 'geo',
         label: (
           <div>
-            <img src={lenguage === 'en' ? Eng : Geo} alt="" />
+            <img src={language === 'en' ? Eng : Geo} alt="" />
           </div>
         ),
       }}

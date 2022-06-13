@@ -1,4 +1,4 @@
-import { Arrow } from 'assets/images';
+import { Arrow } from 'assets';
 
 const TableCol: React.FC<{
   text: string;

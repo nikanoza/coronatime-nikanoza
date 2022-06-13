@@ -1,8 +1,7 @@
-import { Vaccines, Coronatime } from 'assets/images';
+import { Vaccines, Coronatime, Warning } from 'assets';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
 import { Link, useNavigate } from 'react-router-dom';
-import { Warning } from 'assets/images';
 import { usePostHttp } from 'hooks';
 
 import { useTranslation } from 'react-i18next';
@@ -86,7 +85,7 @@ const Registration = () => {
             <Input
               label="username"
               className="mt-1 flex flex-col"
-              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -119,7 +118,7 @@ const Registration = () => {
             <Input
               label="email"
               className="mt-14 md:mt-6 flex flex-col"
-              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.email,
                 touchedFields.email && getValues('email') !== ''
               )} outline-none`}
@@ -142,7 +141,7 @@ const Registration = () => {
             <Input
               label="password"
               className="mt-1 flex flex-col"
-              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.password,
                 touchedFields.password && getValues('password') !== ''
               )} outline-none`}
@@ -171,7 +170,7 @@ const Registration = () => {
             <Input
               label="repeat_password"
               className="mt-1 flex flex-col"
-              inputClass={`w-11/12 lg:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.repeat_password,
                 touchedFields.repeat_password &&
                   getValues('repeat_password') !== ''
@@ -203,7 +202,7 @@ const Registration = () => {
               <Input
                 label="remember"
                 text={t('Remember this device')}
-                inputClass="w-5 h-5 mr-2"
+                inputClass="w-5 h-5 mr-2 accent-green-600"
                 className="flex flex-row-reverse"
                 type="checkbox"
                 register={register}

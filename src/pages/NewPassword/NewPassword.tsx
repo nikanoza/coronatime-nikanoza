@@ -1,4 +1,4 @@
-import { Coronatime, Success, Warning } from 'assets/images';
+import { Coronatime, Success, Warning } from 'assets';
 import { Button, Input } from 'components';
 import { usePostHttp } from 'hooks';
 import { useState } from 'react';
@@ -74,7 +74,7 @@ const NewPassword = () => {
           <Input
             label="new_password"
             text={t('new password')}
-            inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+            inputClass={`w-full pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
               errors.new_password,
               touchedFields.new_password && getValues('new_password') !== ''
             )} outline-none`}
@@ -103,7 +103,7 @@ const NewPassword = () => {
           <Input
             label="repeat_password"
             className="mt-1 flex flex-col"
-            inputClass={`w-full pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+            inputClass={`w-full pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
               errors.repeat_password,
               touchedFields.repeat_password &&
                 getValues('repeat_password') !== ''

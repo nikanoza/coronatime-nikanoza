@@ -1,7 +1,7 @@
 import React from 'react';
-import { Correct } from 'assets/images';
+import { Correct } from 'assets';
 
-interface propsObj {
+const Input: React.FC<{
   label: string;
   className: string;
   inputClass?: string;
@@ -11,11 +11,9 @@ interface propsObj {
   register: any;
   validations: object;
   correct?: boolean;
-  onChange?: Function;
+  onChange?: () => void;
   iconClass?: string;
-}
-
-const Input: React.FC<propsObj> = (props) => {
+}> = (props) => {
   return (
     <div className={props.className}>
       <label className="font-bold capitalize" htmlFor={props.label}>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { TableCol } from 'pages/Dashboard/Routes/Country/components';
+import { TableCol } from 'pages/Dashboard/Country/components';
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -28,9 +28,9 @@ const Country = () => {
   const [statisticsClone, setStatisticsClone] = useState([]);
   let token = localStorage.getItem('token');
   useEffect(() => {
-    const storagestatistics = localStorage.getItem('statistics');
-    if (storagestatistics) {
-      setStatistics(JSON.parse(storagestatistics));
+    const storageStatistics = localStorage.getItem('statistics');
+    if (storageStatistics) {
+      setStatistics(JSON.parse(storageStatistics));
     }
   }, []);
   const getStatistic = async () => {
@@ -49,7 +49,6 @@ const Country = () => {
       setStatisticsClone(response.data);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log('error message: ', error.message);
         return error.message;
       }
     }

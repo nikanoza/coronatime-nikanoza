@@ -1,4 +1,4 @@
-import { Coronatime } from 'assets/images';
+import { Coronatime } from 'assets';
 import { Language } from 'components';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full h-full flec flex-col p-1 md:p-10">
+    <div className="w-full h-full flex flex-col p-1 md:p-10">
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
         <menu

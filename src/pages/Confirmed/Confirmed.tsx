@@ -1,4 +1,4 @@
-import { Coronatime, Success } from 'assets/images';
+import { Coronatime, Success } from 'assets';
 import { Button } from 'components';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

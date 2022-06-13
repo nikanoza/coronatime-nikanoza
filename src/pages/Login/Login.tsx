@@ -1,4 +1,4 @@
-import { Vaccines, Coronatime, Warning } from 'assets/images';
+import { Vaccines, Coronatime, Warning } from 'assets';
 import { Input, Button, Language } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -79,11 +79,11 @@ const Login = () => {
           <div className="mt-2 text-[#808189]">
             {t('Welcome back! Please enter your details')}
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3">
             <Input
               label="username"
               text={t('username')}
-              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 xl:w-2/3 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -112,7 +112,7 @@ const Login = () => {
             <Input
               label="password"
               text={t('password')}
-              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.password,
                 touchedFields.password && getValues('password') !== ''
               )} outline-none`}
@@ -136,7 +136,7 @@ const Login = () => {
               <Input
                 label="remember"
                 text={t('Remember this device')}
-                inputClass="w-5 h-5 mr-2"
+                inputClass="w-5 h-5 mr-2 accent-green-600"
                 className="flex flex-row-reverse"
                 type="checkbox"
                 register={register}
@@ -150,13 +150,13 @@ const Login = () => {
                 {t('Forgot password?')}
               </Link>
             </div>
-            <div className="w-5/6">
+            <div className="w-full">
               <Button type="submit" id="login_btn" className="w-full">
                 {t('log in')}
               </Button>
             </div>
           </form>
-          <div className="flex mt-6 items-center justify-center w-5/6">
+          <div className="flex mt-6 items-center justify-center w-5/6 lg:w-3/4">
             {t('Don’t have and account?')}
             <Link to={'/registration'} className="text-[#2029F3] ml-2">
               {t('Sign up for free')}
