@@ -13,7 +13,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { World, Country } from 'pages/Dashboard/Routes';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import common_geo from 'locals/geo.json';
+import common_geo from 'locales/geo.json';
 
 i18next.use(initReactI18next).init({
   fallbackLng: 'en',

@@ -20,12 +20,10 @@
     "Please enter required info to sign up":
       "რეგისტრაციისთვის შეიყვანეთ მოთხოვნილი ინფორმაცია",
     "Enter unique username": "შეიყვანეთ მომხმარებლის სახელი",
-    "username should be unique, min 3 symbols":
-      "მომხმარებლის სახელი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინ 3 სიმბოლოსგან",
     "email": "ელ–ფოსტა",
     "Enter your email": "შეიყვანეთ ელ-ფოსტა",
     "password should be unique, min 3 symbols":
-      "პაროლი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინ 3 სიმბოლოსგან",
+      "პაროლი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინიმუმ 3 სიმბოლოსგან",
     "reapeat password": "გაიმეორეთ პაროლი",
     "password did not match": "უნდა ემთხვეოდეს პაროლს",
     "sign up": "რეგისტრაცია",
