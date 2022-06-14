@@ -1,5 +1,6 @@
 import React from 'react';
 import { Correct } from 'assets';
+import { UseFormRegister } from 'react-hook-form';
 
 const Input: React.FC<{
   label: string;
@@ -8,7 +9,7 @@ const Input: React.FC<{
   text: string;
   type: string;
   placeholder?: string;
-  register: any;
+  register: UseFormRegister<any>;
   validations: object;
   correct?: boolean;
   onChange?: () => void;

@@ -13,7 +13,7 @@ const Language = () => {
     {
       value: 'en',
       label: (
-        <div>
+        <div className="flex items-center justify-center">
           <img src={Eng} alt="" />
         </div>
       ),
@@ -21,7 +21,7 @@ const Language = () => {
     {
       value: 'geo',
       label: (
-        <div id="geo">
+        <div id="geo" className="flex items-center justify-center">
           <img src={Geo} alt="" />
         </div>
       ),
@@ -35,7 +35,7 @@ const Language = () => {
       defaultValue={{
         value: language === 'en' ? 'en' : 'geo',
         label: (
-          <div>
+          <div className="flex items-center justify-center">
             <img src={language === 'en' ? Eng : Geo} alt="" />
           </div>
         ),

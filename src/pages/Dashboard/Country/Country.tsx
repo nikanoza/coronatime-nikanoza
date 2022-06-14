@@ -112,7 +112,7 @@ const Country = () => {
         onChange={countryFilterHandler}
       />
       <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full">
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 lg:grid-cols-6 bg-[#F6F6F7]">
           <TableCol
             text={t('location')}
             sortAsc={sortNameAsc}
@@ -141,24 +141,24 @@ const Country = () => {
         <div className="mt-2 w-full h-full overflow-y-scroll">
           {statistics.length > 0 &&
             statisticsClone.map((country: CountryType, index) => (
-              <div key={index} className="grid grid-cols-4">
+              <div key={index} className="grid grid-cols-4 lg:grid-cols-6">
                 <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
-                  <div className="w-full md:w-1/2 flex justify-start">
+                  <div className="w-1/2 flex justify-start">
                     {language === 'en' ? country.name.en : country.name.ka}
                   </div>
                 </div>
                 <div className="flex items-center justify-center border-b">
-                  <div className="w-full md:w-1/2 flex justify-start">
+                  <div className="w-1/2 flex justify-start">
                     {country.statistics.confirmed}
                   </div>
                 </div>
                 <div className="flex items-center justify-center border-b">
-                  <div className="w-full md:w-1/2 flex justify-start">
+                  <div className="md:w-1/2 flex justify-start md:ml-8">
                     {country.statistics.deaths}
                   </div>
                 </div>
-                <div className="flex items-center justify-center border-b">
-                  <div className="w-full md:w-1/2 flex justify-start">
+                <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
+                  <div className="md:w-1/2 flex justify-start lg:ml-12">
                     {country.statistics.recovered}
                   </div>
                 </div>

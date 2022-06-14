@@ -5,6 +5,7 @@ import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { usePostHttp } from 'hooks';
 import { useNavigate } from 'react-router-dom';
+import env from 'react-dotenv';
 
 const Reset = () => {
   const { t } = useTranslation();
@@ -27,8 +28,7 @@ const Reset = () => {
       link: 'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
       body: {
         email: getValues('email'),
-        backlink:
-          'https://coronatime.nika-nozadze.redberryinternship.ge/new-password',
+        backlink: env.API_URL + '/new-password',
       },
     },
     applyData: (param: string) => {

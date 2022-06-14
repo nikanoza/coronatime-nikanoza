@@ -11,3 +11,4 @@ export { default as Recovered } from './recovered.png';
 export { default as Cases } from './cases.png';
 export { default as Search } from './search.png';
 export { default as Arrow } from './arrow.png';
+export { default as Dark } from './dark.png';

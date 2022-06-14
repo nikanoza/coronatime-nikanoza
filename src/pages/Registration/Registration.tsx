@@ -3,6 +3,7 @@ import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
 import { Link, useNavigate } from 'react-router-dom';
 import { usePostHttp } from 'hooks';
+import env from 'react-dotenv';
 
 import { useTranslation } from 'react-i18next';
 
@@ -36,8 +37,7 @@ const Registration = () => {
         email: getValues('email'),
         password: getValues('password'),
         repeatPassword: getValues('repeat_password'),
-        redirectOnConfirm:
-          'https://coronatime.nika-nozadze.redberryinternship.ge/confirmation',
+        redirectOnConfirm: env.API_URL + '/confirmation',
       },
     },
     applyData: (param: string) => {
@@ -117,7 +117,7 @@ const Registration = () => {
             </div>
             <Input
               label="email"
-              className="mt-14 md:mt-6 flex flex-col"
+              className="mt-14 mm:mt-10 md:mt-6 flex flex-col"
               inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.email,
                 touchedFields.email && getValues('email') !== ''
