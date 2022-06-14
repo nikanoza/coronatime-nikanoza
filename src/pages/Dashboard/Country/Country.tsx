@@ -143,16 +143,24 @@ const Country = () => {
             statisticsClone.map((country: CountryType, index) => (
               <div key={index} className="grid grid-cols-4">
                 <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
-                  {language === 'en' ? country.name.en : country.name.ka}
+                  <div className="w-full md:w-1/2 flex justify-start">
+                    {language === 'en' ? country.name.en : country.name.ka}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center border-b">
-                  {country.statistics.confirmed}
+                  <div className="w-full md:w-1/2 flex justify-start">
+                    {country.statistics.confirmed}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center border-b">
-                  {country.statistics.deaths}
+                  <div className="w-full md:w-1/2 flex justify-start">
+                    {country.statistics.deaths}
+                  </div>
                 </div>
                 <div className="flex items-center justify-center border-b">
-                  {country.statistics.recovered}
+                  <div className="w-full md:w-1/2 flex justify-start">
+                    {country.statistics.recovered}
+                  </div>
                 </div>
               </div>
             ))}

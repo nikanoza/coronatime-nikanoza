@@ -13,7 +13,7 @@
     "Don’t have and account?": "არ გაქვს ექაუნთი?",
     "Sign up for free": "დარეგისტრირდი",
     "Name not found": "სახელის ველი ცარიელია",
-    "Username should be unique, min 3 symbols":
+    "username should be unique, min 3 symbols":
       "მომხმარებლის სახელი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინიმუმ 3 სიმბოლოსგან",
     "field is ampty": "ეს ველი არ უნდა იყოს ცარიელი",
     "Welcome to Coronatime": "კეთილი იყოს თქვენი მობრძანება კორონათაიმზე",
@@ -57,6 +57,7 @@
     "new cases": "ახალი შემთხვევები",
     "death": "გარდაცვლილები",
     "recovered": "გამოჯანმრთელებულები",
-    "Search by country": "ძიება ქვეყნების მიხედვით"
+    "Search by country": "ძიება ქვეყნების მიხედვით",
+    "Your password has been updeted successfully": "პაროლი წარმატებით შეიცვალა"
 }
 

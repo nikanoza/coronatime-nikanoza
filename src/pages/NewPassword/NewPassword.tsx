@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const NewPassword = () => {
-  const [sentReq, setSentReq] = useState(true);
+  const [sentReq, setSentReq] = useState(false);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const hash = params.get('hash');
@@ -62,14 +62,14 @@ const NewPassword = () => {
     <div className="flex flex-col w-full h-full justify-start items-center">
       <img src={Coronatime} alt="" className="mt-5" />
       {!sentReq && (
-        <div className="font-bold text-lg mt-20 capitalize">
+        <div className="font-bold text-lg mt-20 md:mt-36 capitalize">
           {t('reset password')}
         </div>
       )}
       {!sentReq && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-4/5 text-sm md:w-1/2 lg:w-1/3"
+          className="w-4/5 text-sm md:w-1/2 lg:w-1/3 h-full flex flex-col pb-5"
         >
           <Input
             label="new_password"
@@ -131,17 +131,25 @@ const NewPassword = () => {
             {errors.repeat_password && <img src={Warning} alt="" />}
             {errors.repeat_password && errors.repeat_password.message}
           </div>
-          <Button type="submit" id="save_new_password_btn" className="w-full">
+          <Button
+            type="submit"
+            id="save_new_password_btn"
+            className="w-full mt-auto md:mt-0"
+          >
             {t('save changes')}
           </Button>
         </form>
       )}
       {sentReq && (
-        <div className="flex flex-col items-center justify-center text-center h-4/6">
-          <img src={Success} alt="" />
+        <div className="flex flex-col items-center justify-center text-center h-full pb-5">
+          <img src={Success} alt="" className="mt-auto md:mt-0" />
           <div>{t('Your password has been updeted successfully')}</div>
-          <Button type="button" id="save_new_password_btn" className="w-5/6">
-            {t('sign in')}
+          <Button
+            type="button"
+            id="save_new_password_btn"
+            className="w-5/6 mt-auto md:mt-5"
+          >
+            <Link to={'/login'}>{t('sign in')}</Link>
           </Button>
         </div>
       )}

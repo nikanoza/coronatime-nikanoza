@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const World = () => {
   const { t } = useTranslation();
   return (
-    <div className="w-full mt-5 md:mt-24 grid grid-cols-2 justify-items-center md:grid-cols-3 xl:mt-20 gap-3 text-xs md:text-base 2xl:text-lg">
+    <div className="w-full mt-5 md:mt-24 grid grid-cols-2 justify-items-center md:grid-cols-3 xl:mt-20 gap-3 text-xs md:text-base 2xl:text-lg p-5">
       <Statistic
         img={Cases}
         text={t('new cases')}

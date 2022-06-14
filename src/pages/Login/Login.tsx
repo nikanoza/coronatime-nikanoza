@@ -70,7 +70,7 @@ const Login = () => {
   return (
     <div className="w-full h-full flex">
       <div className="w-full h-full lg:w-3/5 pt-3 pb-3 items-center justify-center">
-        <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm">
+        <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm p-2">
           <div className="flex items-center justify-between pr-12">
             <img src={Coronatime} alt="" className="" />
             <Language />
@@ -83,7 +83,7 @@ const Login = () => {
             <Input
               label="username"
               text={t('username')}
-              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 xl:w-2/3 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-full lg:w-3/4 xl:w-2/3 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -112,7 +112,7 @@ const Login = () => {
             <Input
               label="password"
               text={t('password')}
-              inputClass={`w-5/6 sm:w-1/2 lg:w-3/4 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-full sm:w-1/2 lg:w-3/4 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.password,
                 touchedFields.password && getValues('password') !== ''
               )} outline-none`}
@@ -132,7 +132,7 @@ const Login = () => {
               {errors.password && <img src={Warning} alt="" />}
               {errors.password && errors.password.message}
             </div>
-            <div className="w-5/6 flex items-center text-center mt-4 whitespace-nowrap flex-col justify-center sm:flex-row sm:justify-between lg:mt-5">
+            <div className="w-full flex items-center text-center mt-4 whitespace-nowrap justify-between sm:flex-row sm:justify-between lg:mt-5">
               <Input
                 label="remember"
                 text={t('Remember this device')}

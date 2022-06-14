@@ -33,26 +33,28 @@ const Dashboard = () => {
     <div className="w-full h-full flex flex-col p-1 md:p-10">
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
+        <div className="ml-auto mr-3">
+          <Language />
+        </div>
         <menu
           className={`gap-10 ${
             collapseMenu
               ? 'hidden'
               : 'border p-2 absolute right-1 top-1 bg-slate-200'
-          } lg:flex`}
+          } md:flex`}
         >
           {!collapseMenu && (
             <button className="text-red-700 text-lg" onClick={toggleMenu}>
               X
             </button>
           )}
-          <Language />
           <div className="flex items-center">{user.username}</div>
           <button className="capitalize" type="button" onClick={logoutHandler}>
             {t('log out')}
           </button>
         </menu>
         <button
-          className={`flex ${!collapseMenu ? 'hidden' : ''} lg:hidden`}
+          className={`flex ${!collapseMenu ? 'hidden' : ''} md:hidden`}
           onClick={toggleMenu}
         >
           <div className="space-y-2" id="h-menu">

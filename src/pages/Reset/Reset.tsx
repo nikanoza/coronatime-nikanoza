@@ -55,14 +55,14 @@ const Reset = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full justify-start items-center xl:text-lg">
+    <div className="flex flex-col w-full h-full justify-start items-center xl:text-lg md:justify-center">
       <img src={Coronatime} alt="" className="mt-5" />
-      <div className="font-bold text-lg mt-10 capitalize md:mt-36">
+      <div className="font-bold text-lg mt-36 capitalize">
         {t('reset password')}
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-4 w-4/5 sm:mt-10 sm:w-1/2 lg:w-1/3 flex flex-col items-center justify-center"
+        className="mt-4 w-4/5 sm:mt-10 sm:w-1/2 lg:w-1/3 flex flex-col items-center justify-center h-full pb-5 md:mt-0 md:justify-start"
       >
         <Input
           label="email"
@@ -71,7 +71,7 @@ const Reset = () => {
             errors.email,
             touchedFields.email && getValues('email') !== ''
           )} outline-none`}
-          className="w-full mt-2 flex flex-col"
+          className="w-full flex flex-col"
           type="email"
           placeholder={t('Enter your email')}
           register={register}
@@ -87,7 +87,7 @@ const Reset = () => {
           {errors.email && <img src={Warning} alt="" />}
           {errors.email && errors.email.message}
         </div>
-        <Button id="reset_btn" type="submit" className="w-full">
+        <Button id="reset_btn" type="submit" className="w-full mt-auto md:mt-0">
           {t('reset password')}
         </Button>
       </form>

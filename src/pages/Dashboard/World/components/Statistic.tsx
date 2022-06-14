@@ -10,7 +10,7 @@ const Statistic: React.FC<{
       className={
         'rounded-2xl flex flex-col ' +
         props.className +
-        ' bg-opacity-[0.08] items-center justify-center w-4/5 pt-1 pb-1'
+        ' bg-opacity-[0.08] items-center justify-center w-full'
       }
       id={props.text}
     >

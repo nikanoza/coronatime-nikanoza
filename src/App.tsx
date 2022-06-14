@@ -4,9 +4,7 @@ import {
   Reset,
   NewPassword,
   Confirmation,
-  Recovery,
   SentInfo,
-  Confirmed,
   Dashboard,
 } from 'pages';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -37,9 +35,7 @@ function App() {
         <Route path="/reset" element={<Reset />} />
         <Route path="/new-password" element={<NewPassword />} />
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/recovery" element={<Recovery />} />
         <Route path="/sent-info" element={<SentInfo />} />
-        <Route path="/confirmed" element={<Confirmed />} />
         <Route key="/dashboard" path="/dashboard" element={<Dashboard />}>
           <Route path="world" element={<World />} />
           <Route key="country" path="country" element={<Country />} />
