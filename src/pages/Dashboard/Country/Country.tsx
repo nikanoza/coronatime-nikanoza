@@ -1,6 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { TableCol } from 'pages/Dashboard/Country/components';
+import { getCountriesStatistics } from 'services';
+
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 
@@ -20,12 +21,19 @@ type CountryType = {
   };
   id: string;
 };
+type Statistics = {
+  confirmed: number;
+  critical: number;
+  deaths: number;
+  recovered: number;
+};
+const countryArray: CountryType[] = [];
 
 const Country = () => {
   const language = i18next.language;
   const { t } = useTranslation();
-  const [statistics, setStatistics] = useState([]);
-  const [statisticsClone, setStatisticsClone] = useState([]);
+  const [statistics, setStatistics] = useState(countryArray);
+  const [statisticsClone, setStatisticsClone] = useState(countryArray);
   let token = localStorage.getItem('token');
   useEffect(() => {
     const storageStatistics = localStorage.getItem('statistics');
@@ -33,32 +41,21 @@ const Country = () => {
       setStatistics(JSON.parse(storageStatistics));
     }
   }, []);
-  const getStatistic = async () => {
-    try {
-      const response = await axios.get(
-        'https://coronatime-api.devtest.ge/api/countries/',
-        {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      localStorage.setItem('statistics', JSON.stringify(response.data));
-      setStatistics(response.data);
-      setStatisticsClone(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return error.message;
-      }
-    }
-  };
   useEffect(() => {
-    if (firstly) {
-      getStatistic();
+    if (firstly && token) {
+      const data = getCountriesStatistics(
+        process.env.REACT_APP_API_URL || '',
+        token
+      );
+      const getData = async () => {
+        localStorage.setItem('statistics', JSON.stringify(data));
+        setStatistics(await data);
+        setStatisticsClone(await data);
+      };
+      getData();
       firstly = false;
     }
-  });
+  }, [token]);
 
   const sortNameAsc = () => {
     const newArray = statistics
@@ -82,12 +79,14 @@ const Country = () => {
     setStatisticsClone(newArray);
   };
   const sortationFc = (property: string, asc: boolean) => {
+    type ObjectKey = keyof Statistics;
+    const prop = property as ObjectKey;
     const newArray = statistics
       .slice()
-      .sort((a, b) =>
+      .sort((a: CountryType, b: CountryType) =>
         asc
-          ? a['statistics'][property] - b['statistics'][property]
-          : b['statistics'][property] - a['statistics'][property]
+          ? a['statistics'][prop] - b['statistics'][prop]
+          : b['statistics'][prop] - a['statistics'][prop]
       );
     setStatisticsClone(newArray);
   };
