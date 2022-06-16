@@ -28,12 +28,39 @@ type Statistics = {
   recovered: number;
 };
 const countryArray: CountryType[] = [];
+type Sort = {
+  name_asc: false;
+  name_dsc: false;
+  cases_asc: false;
+  cases_dsc: false;
+  death_asc: false;
+  death_dsc: false;
+  recovered_asc: false;
+  recovered_dsc: false;
+};
+
+const sortationState = {
+  name_asc: false,
+  name_dsc: false,
+  cases_asc: false,
+  cases_dsc: false,
+  death_asc: false,
+  death_dsc: false,
+  recovered_asc: false,
+  recovered_dsc: false,
+};
 
 const Country = () => {
   const language = i18next.language;
   const { t } = useTranslation();
   const [statistics, setStatistics] = useState(countryArray);
   const [statisticsClone, setStatisticsClone] = useState(countryArray);
+  const [sortOptions, setSortOptions] = useState(sortationState);
+  const changeSortation = (property: keyof Sort, value: boolean) => {
+    const obj = { ...sortationState };
+    obj[property] = value;
+    setSortOptions(obj);
+  };
   let token = localStorage.getItem('token');
   useEffect(() => {
     const storageStatistics = localStorage.getItem('statistics');
@@ -103,7 +130,7 @@ const Country = () => {
     setStatisticsClone(newArray);
   };
   return (
-    <div className="h-1/3 text-xs md:text-base">
+    <div className="h-1/3 text-xs">
       <input
         type="text"
         placeholder={t('Search by country')}
@@ -117,46 +144,63 @@ const Country = () => {
             sortAsc={sortNameAsc}
             sortDsc={sortNameDsc}
             btnIds={{ asc: 'name_asc', dsc: 'name_dsc' }}
+            changeHandler={changeSortation}
+            ifSorted={{ asc: sortOptions.name_asc, dsc: sortOptions.name_dsc }}
           />
           <TableCol
             text={t('new cases')}
             sortAsc={() => sortationFc('confirmed', true)}
             sortDsc={() => sortationFc('confirmed', false)}
             btnIds={{ asc: 'cases_asc', dsc: 'cases_dsc' }}
+            changeHandler={changeSortation}
+            ifSorted={{
+              asc: sortOptions.cases_asc,
+              dsc: sortOptions.cases_dsc,
+            }}
           />
           <TableCol
             text={t('death')}
             sortAsc={() => sortationFc('deaths', true)}
             sortDsc={() => sortationFc('deaths', false)}
             btnIds={{ asc: 'death_asc', dsc: 'death_dsc' }}
+            changeHandler={changeSortation}
+            ifSorted={{
+              asc: sortOptions.death_asc,
+              dsc: sortOptions.death_dsc,
+            }}
           />
           <TableCol
             text={t('recovered')}
             sortAsc={() => sortationFc('recovered', true)}
             sortDsc={() => sortationFc('recovered', false)}
             btnIds={{ asc: 'recovered_asc', dsc: 'recovered_dsc' }}
+            changeHandler={changeSortation}
+            ifSorted={{
+              asc: sortOptions.recovered_asc,
+              dsc: sortOptions.recovered_dsc,
+            }}
           />
         </div>
         <div className="mt-2 w-full h-full overflow-y-scroll">
           {statisticsClone.map((country: CountryType, index) => (
             <div key={index} className="grid grid-cols-4 lg:grid-cols-6">
               <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
-                <div className="w-1/2 flex justify-start">
+                <div className="w-1/3 flex justify-start">
                   {language === 'en' ? country.name.en : country.name.ka}
                 </div>
               </div>
               <div className="flex items-center justify-center border-b">
-                <div className="w-1/2 flex justify-start">
+                <div className="w-1/3 flex justify-start">
                   {country.statistics.confirmed}
                 </div>
               </div>
               <div className="flex items-center justify-center border-b">
-                <div className="md:w-1/2 flex justify-start md:ml-8">
+                <div className="w-1/3 flex justify-start md:ml-8">
                   {country.statistics.deaths}
                 </div>
               </div>
               <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
-                <div className="md:w-1/2 flex justify-start lg:ml-12">
+                <div className="1/3 flex justify-start lg:ml-24">
                   {country.statistics.recovered}
                 </div>
               </div>

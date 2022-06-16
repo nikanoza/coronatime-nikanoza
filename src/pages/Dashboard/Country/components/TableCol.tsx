@@ -1,5 +1,15 @@
 import { Arrow, Dark } from 'assets';
-import { useState } from 'react';
+
+type Sort = {
+  name_asc: false;
+  name_dsc: false;
+  cases_asc: false;
+  cases_dsc: false;
+  death_asc: false;
+  death_dsc: false;
+  recovered_asc: false;
+  recovered_dsc: false;
+};
 
 const TableCol: React.FC<{
   text: string;
@@ -9,52 +19,39 @@ const TableCol: React.FC<{
     asc: string;
     dsc: string;
   };
+  changeHandler: (property: keyof Sort, value: boolean) => void;
+  ifSorted: { asc: boolean; dsc: boolean };
 }> = (props) => {
-  const [ascButton, setAscButton] = useState(false);
-  const [dscButton, setDscButton] = useState(false);
-
-  const sortationHandler = () => {
-    if (!ascButton && !dscButton) {
-      props.sortAsc();
-      setDscButton(false);
-      setAscButton(true);
-    } else if (ascButton) {
-      props.sortDsc();
-      setDscButton(true);
-      setAscButton(false);
-    } else {
-      props.sortAsc();
-      setDscButton(false);
-      setAscButton(true);
-    }
-  };
   return (
-    <div className="flex items-center justify-center text-center gap-1 md:gap-3 md:pt-5 md:pb-5 md:pl-8 md:pr-8 ">
-      <div
-        className="text-semibold capitalize cursor-pointer"
-        onClick={sortationHandler}
-      >
+    <div className="flex items-center justify-center text-center gap-1 md:gap-3 md:pt-5 md:pb-5 md:pl-8 md:pr-8">
+      <div className="text-semibold capitalize cursor-pointer">
         {props.text}
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <button
           onClick={() => {
-            setDscButton(true);
-            setAscButton(false);
             props.sortDsc();
+            props.changeHandler(props.btnIds.asc as keyof Sort, true);
           }}
           id={props.btnIds.asc}
         >
-          <img src={!dscButton ? Arrow : Dark} alt="" className="rotate-180" />
+          <img
+            src={props.ifSorted.asc ? Dark : Arrow}
+            alt=""
+            className="rotate-180"
+          />
         </button>
         <button
           onClick={() => {
-            setDscButton(false);
-            setAscButton(true);
             props.sortAsc();
+            props.changeHandler(props.btnIds.dsc as keyof Sort, true);
           }}
         >
-          <img src={!ascButton ? Arrow : Dark} alt="" id={props.btnIds.dsc} />
+          <img
+            src={props.ifSorted.dsc ? Dark : Arrow}
+            alt=""
+            id={props.btnIds.dsc}
+          />
         </button>
       </div>
     </div>
