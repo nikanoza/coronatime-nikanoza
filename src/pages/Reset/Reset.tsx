@@ -1,11 +1,10 @@
 import { Coronatime, Warning } from 'assets';
 import { Input, Button } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { recovery } from 'services';
 
 import { useTranslation } from 'react-i18next';
-import { usePostHttp } from 'hooks';
 import { useNavigate } from 'react-router-dom';
-import env from 'react-dotenv';
 
 const Reset = () => {
   const { t } = useTranslation();
@@ -23,26 +22,6 @@ const Reset = () => {
 
   const navigate = useNavigate();
 
-  const { requestFc: sentRequest } = usePostHttp({
-    obj: {
-      link: 'https://coronatime-api.devtest.ge/api/password/send-recovery-link',
-      body: {
-        email: getValues('email'),
-        backlink: env.API_URL + '/new-password',
-      },
-    },
-    applyData: (param: string) => {
-      navigate('/sent-info');
-      return JSON.parse(param);
-    },
-    errorFc: (property) => {
-      setError('email', {
-        type: 'custom',
-        message: t('email not found'),
-      });
-    },
-  });
-
   const setErrorStyle = (
     error: FieldError | undefined,
     touched: boolean | undefined
@@ -51,7 +30,23 @@ const Reset = () => {
   };
 
   const onSubmit: SubmitHandler<FormsValues> = (): void => {
-    sentRequest();
+    const recoveryReq = recovery(process.env.REACT_APP_RECOVERY_LINK || '', {
+      email: getValues('email'),
+      backlink: process.env.REACT_APP_PASSWORD_RECOVERY_BACKLINK || '',
+    });
+
+    const sentReq = async () => {
+      const data = await recoveryReq;
+      if (data === '') {
+        navigate('/sent-info');
+      } else {
+        setError('email', {
+          type: 'custom',
+          message: t('email not found'),
+        });
+      }
+    };
+    sentReq();
   };
 
   return (
@@ -87,7 +82,7 @@ const Reset = () => {
           {errors.email && <img src={Warning} alt="" />}
           {errors.email && errors.email.message}
         </div>
-        <Button id="reset_btn" type="submit" className="w-full mt-auto md:mt-0">
+        <Button id="reset_btn" type="submit" className="w-full mt-auto md:mt-5">
           {t('reset password')}
         </Button>
       </form>

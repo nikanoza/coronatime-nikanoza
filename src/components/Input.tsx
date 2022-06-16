@@ -25,6 +25,7 @@ const Input: React.FC<{
           type={props.type}
           className={props.inputClass}
           placeholder={props.placeholder}
+          autoComplete="on"
           {...props.register(props.label, {
             ...props.validations,
             onChange: props.onChange,

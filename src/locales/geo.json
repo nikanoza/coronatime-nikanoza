@@ -58,6 +58,7 @@
     "death": "გარდაცვლილები",
     "recovered": "გამოჯანმრთელებულები",
     "Search by country": "ძიება ქვეყნების მიხედვით",
-    "Your password has been updeted successfully": "პაროლი წარმატებით შეიცვალა"
+    "Your password has been updeted successfully": "პაროლი წარმატებით შეიცვალა",
+    "invalid data provided.": "მონაცემები არავალიდურია"
 }
 

@@ -1,32 +1,21 @@
-import axios from 'axios';
+// import axios from 'axios';
+// import { method } from 'cypress/types/bluebird';
+import { AxiosResponse } from 'axios';
+import { instance } from 'services';
 
-type Country = {
-  code: string;
-  name: {
-    en: string;
-    ka: string;
-  };
-  statistics: {
-    confirmed: number;
-    critical: number;
-    deaths: number;
-    recovered: number;
-  };
-  id: string;
-};
-const getCountriesStatistics = async (
-  url: string,
-  token: string
-): Promise<Country[]> => {
+const getCountriesStatistics = async (url: string, token: string) => {
   try {
-    const response = await axios.get(url, {
+    const response = await instance({
+      url: url,
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${token}`,
       },
+    }).then((res: AxiosResponse<any>) => {
+      return res.data;
     });
-    const data = response.data;
-    return data;
+    return response;
   } catch (error) {
     return error.message;
   }

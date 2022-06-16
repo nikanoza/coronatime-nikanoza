@@ -1,8 +1,8 @@
 import { Coronatime, Success, Warning } from 'assets';
 import { Button, Input } from 'components';
-import { usePostHttp } from 'hooks';
 import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
+import { setNewPassword } from 'services';
 
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
@@ -27,27 +27,6 @@ const NewPassword = () => {
     setError,
   } = useForm<FormsValues>();
 
-  const { requestFc: sentRequest } = usePostHttp({
-    obj: {
-      link: 'https://coronatime-api.devtest.ge/api/password/recover',
-      body: {
-        hash: hash,
-        password: getValues('new_password'),
-        repeatPassword: getValues('repeat_password'),
-      },
-    },
-    applyData: (param: string) => {
-      setSentReq(true);
-      return JSON.parse(param);
-    },
-    errorFc: () => {
-      setError('new_password', {
-        type: 'custom',
-        message: t('invalid data provided.'),
-      });
-    },
-  });
-
   const setErrorStyle = (
     error: FieldError | undefined,
     touched: boolean | undefined
@@ -56,7 +35,24 @@ const NewPassword = () => {
   };
 
   const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void => {
-    sentRequest();
+    const req = setNewPassword(process.env.REACT_APP_SET_NEW_PASSWORD || '', {
+      hash: hash || '',
+      password: getValues('new_password'),
+      repeatPassword: getValues('repeat_password'),
+    });
+
+    const sent = async () => {
+      const data = await req;
+      if (data === '') {
+        setSentReq(false);
+      } else {
+        setError('new_password', {
+          type: 'custom',
+          message: t('invalid data provided.'),
+        });
+      }
+    };
+    sent();
   };
   return (
     <div className="flex flex-col w-full h-full justify-start items-center">
@@ -134,7 +130,7 @@ const NewPassword = () => {
           <Button
             type="submit"
             id="save_new_password_btn"
-            className="w-full mt-auto md:mt-0"
+            className="w-full mt-auto md:mt-5"
           >
             {t('save changes')}
           </Button>

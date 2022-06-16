@@ -1,6 +1,7 @@
 import { Coronatime, Success } from 'assets';
 import { Button } from 'components';
-import { usePostHttp } from 'hooks';
+import { onAccountConfirm } from 'services';
+
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,22 +13,9 @@ const Confirmation = () => {
 
   const { t } = useTranslation();
 
-  const { requestFc: sentRequest } = usePostHttp({
-    obj: {
-      link: 'https://coronatime-api.devtest.ge/api/confirm-account',
-      body: {
-        hash: hash,
-      },
-    },
-    applyData: (param: string) => {
-      return JSON.parse(param);
-    },
-    errorFc: (property) => {},
-  });
-
   useEffect(() => {
     if (hash) {
-      sentRequest();
+      onAccountConfirm(process.env.REACT_APP_CONFIRM_ACCOUNT || '', { hash });
     }
   });
   return (

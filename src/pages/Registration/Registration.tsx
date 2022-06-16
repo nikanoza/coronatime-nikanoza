@@ -2,8 +2,7 @@ import { Vaccines, Coronatime, Warning } from 'assets';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
 import { Link, useNavigate } from 'react-router-dom';
-import { usePostHttp } from 'hooks';
-import env from 'react-dotenv';
+import { onRegistration } from 'services';
 
 import { useTranslation } from 'react-i18next';
 
@@ -29,36 +28,6 @@ const Registration = () => {
     shouldFocusError: false,
   });
 
-  const { requestFc: sentRequest } = usePostHttp({
-    obj: {
-      link: 'https://coronatime-api.devtest.ge/api/register',
-      body: {
-        username: getValues('username'),
-        email: getValues('email'),
-        password: getValues('password'),
-        repeatPassword: getValues('repeat_password'),
-        redirectOnConfirm: env.API_URL + '/confirmation',
-      },
-    },
-    applyData: (param: string) => {
-      navigate('/sent-info');
-      return JSON.parse(param);
-    },
-    errorFc: (property) => {
-      if (property === 'username') {
-        setError('username', {
-          type: 'custom',
-          message: t('this username is already taken.'),
-        });
-      } else {
-        setError('email', {
-          type: 'custom',
-          message: t('this email is already taken.'),
-        });
-      }
-    },
-  });
-
   const setErrorStyle = (
     error: FieldError | undefined,
     touched: boolean | undefined
@@ -67,7 +36,33 @@ const Registration = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = (): void => {
-    sentRequest();
+    const req = onRegistration(process.env.REACT_APP_REGISTRATION || '', {
+      username: getValues('username'),
+      email: getValues('email'),
+      password: getValues('password'),
+      repeatPassword: getValues('repeat_password'),
+      redirectOnConfirm: process.env.REACT_APP_REDIRECT_CONFIRM || '',
+    });
+
+    const sent = async () => {
+      const data = await req;
+      if (data === '') {
+        navigate('/sent-info');
+      } else {
+        if (data === 'username') {
+          setError('username', {
+            type: 'custom',
+            message: t('this username is already taken.'),
+          });
+        } else {
+          setError('email', {
+            type: 'custom',
+            message: t('this email is already taken.'),
+          });
+        }
+      }
+    };
+    sent();
   };
   return (
     <div className="w-full h-full flex items-center justify-center">

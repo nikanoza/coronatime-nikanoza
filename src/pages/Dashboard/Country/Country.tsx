@@ -39,16 +39,17 @@ const Country = () => {
     const storageStatistics = localStorage.getItem('statistics');
     if (storageStatistics) {
       setStatistics(JSON.parse(storageStatistics));
+      setStatisticsClone(JSON.parse(storageStatistics));
     }
   }, []);
   useEffect(() => {
     if (firstly && token) {
       const data = getCountriesStatistics(
-        process.env.REACT_APP_API_URL || '',
+        process.env.REACT_APP_COUNTRY_URL || '',
         token
       );
       const getData = async () => {
-        localStorage.setItem('statistics', JSON.stringify(data));
+        localStorage.setItem('statistics', JSON.stringify(await data));
         setStatistics(await data);
         setStatisticsClone(await data);
       };
@@ -101,7 +102,6 @@ const Country = () => {
     });
     setStatisticsClone(newArray);
   };
-
   return (
     <div className="h-1/3 text-xs md:text-base">
       <input
@@ -138,31 +138,30 @@ const Country = () => {
           />
         </div>
         <div className="mt-2 w-full h-full overflow-y-scroll">
-          {statistics.length > 0 &&
-            statisticsClone.map((country: CountryType, index) => (
-              <div key={index} className="grid grid-cols-4 lg:grid-cols-6">
-                <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
-                  <div className="w-1/2 flex justify-start">
-                    {language === 'en' ? country.name.en : country.name.ka}
-                  </div>
-                </div>
-                <div className="flex items-center justify-center border-b">
-                  <div className="w-1/2 flex justify-start">
-                    {country.statistics.confirmed}
-                  </div>
-                </div>
-                <div className="flex items-center justify-center border-b">
-                  <div className="md:w-1/2 flex justify-start md:ml-8">
-                    {country.statistics.deaths}
-                  </div>
-                </div>
-                <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
-                  <div className="md:w-1/2 flex justify-start lg:ml-12">
-                    {country.statistics.recovered}
-                  </div>
+          {statisticsClone.map((country: CountryType, index) => (
+            <div key={index} className="grid grid-cols-4 lg:grid-cols-6">
+              <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
+                <div className="w-1/2 flex justify-start">
+                  {language === 'en' ? country.name.en : country.name.ka}
                 </div>
               </div>
-            ))}
+              <div className="flex items-center justify-center border-b">
+                <div className="w-1/2 flex justify-start">
+                  {country.statistics.confirmed}
+                </div>
+              </div>
+              <div className="flex items-center justify-center border-b">
+                <div className="md:w-1/2 flex justify-start md:ml-8">
+                  {country.statistics.deaths}
+                </div>
+              </div>
+              <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
+                <div className="md:w-1/2 flex justify-start lg:ml-12">
+                  {country.statistics.recovered}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

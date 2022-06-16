@@ -2,9 +2,9 @@ import { Vaccines, Coronatime, Warning } from 'assets';
 import { Input, Button, Language } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { login } from 'services';
 
 import { useTranslation } from 'react-i18next';
-import { usePostHttp } from 'hooks';
 
 const Login = () => {
   type FormValues = {
@@ -24,38 +24,6 @@ const Login = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { requestFc: sentRequest } = usePostHttp({
-    obj: {
-      link: 'https://coronatime-api.devtest.ge/api/login',
-      body: {
-        username: getValues('username'),
-        password: getValues('password'),
-      },
-    },
-    applyData: (param: string) => {
-      const { token } = JSON.parse(param);
-      localStorage.setItem('token', token);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          login: true,
-          username: getValues('username'),
-        })
-      );
-      navigate('/dashboard/world');
-      return JSON.parse(param);
-    },
-    errorFc: (property) => {
-      setError('password', {
-        type: 'custom',
-        message: t('please, provide correct credentials...'),
-      });
-      setError('username', {
-        type: 'custom',
-        message: t('please, provide correct credentials...'),
-      });
-    },
-  });
 
   const setErrorStyle = (
     error: FieldError | undefined,
@@ -64,8 +32,35 @@ const Login = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (): void => {
-    sentRequest();
+  const onSubmit: SubmitHandler<FormValues> = () => {
+    const sign_in = login(process.env.REACT_APP_LOGIN_URL || '', {
+      username: getValues('username'),
+      password: getValues('password'),
+    });
+    const let_me_in = async () => {
+      const data = await sign_in;
+      if (typeof data === 'string') {
+        setError('password', {
+          type: 'custom',
+          message: t('please, provide correct credentials...'),
+        });
+        setError('username', {
+          type: 'custom',
+          message: t('please, provide correct credentials...'),
+        });
+      } else {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            login: true,
+            username: getValues('username'),
+          })
+        );
+        navigate('/dashboard/world');
+      }
+    };
+    let_me_in();
   };
   return (
     <div className="w-full h-full flex">
