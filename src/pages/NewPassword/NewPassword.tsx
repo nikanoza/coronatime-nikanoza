@@ -70,7 +70,7 @@ const NewPassword = () => {
           <Input
             label="new_password"
             text={t('new password')}
-            inputClass={`w-full pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+            inputClass={`w-full pt-1 h-9 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
               errors.new_password,
               touchedFields.new_password && getValues('new_password') !== ''
             )} outline-none`}
@@ -99,7 +99,7 @@ const NewPassword = () => {
           <Input
             label="repeat_password"
             className="mt-1 flex flex-col"
-            inputClass={`w-full pt-1 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+            inputClass={`w-full pt-1 h-9 lg:h-11 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
               errors.repeat_password,
               touchedFields.repeat_password &&
                 getValues('repeat_password') !== ''
@@ -139,7 +139,7 @@ const NewPassword = () => {
       {sentReq && (
         <div className="flex flex-col items-center justify-center text-center h-full pb-5">
           <img src={Success} alt="" className="mt-auto md:mt-0" />
-          <div>{t('Your password has been updeted successfully')}</div>
+          <div>{t('Your password has been updated successfully')}</div>
           <Button
             type="button"
             id="save_new_password_btn"

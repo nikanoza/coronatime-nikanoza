@@ -15,7 +15,7 @@
     "Name not found": "სახელის ველი ცარიელია",
     "username should be unique, min 3 symbols":
       "მომხმარებლის სახელი უნდა იყოს უნიკალური, უნდა შედგებოდეს მინიმუმ 3 სიმბოლოსგან",
-    "field is ampty": "ეს ველი არ უნდა იყოს ცარიელი",
+    "field is empty": "ეს ველი არ უნდა იყოს ცარიელი",
     "Welcome to Coronatime": "კეთილი იყოს თქვენი მობრძანება კორონათაიმზე",
     "Please enter required info to sign up":
       "რეგისტრაციისთვის შეიყვანეთ მოთხოვნილი ინფორმაცია",
@@ -58,7 +58,7 @@
     "death": "გარდაცვლილები",
     "recovered": "გამოჯანმრთელებულები",
     "Search by country": "ძიება ქვეყნების მიხედვით",
-    "Your password has been updeted successfully": "პაროლი წარმატებით შეიცვალა",
+    "Your password has been updated successfully": "პაროლი წარმატებით შეიცვალა",
     "invalid data provided.": "მონაცემები არავალიდურია"
 }
 

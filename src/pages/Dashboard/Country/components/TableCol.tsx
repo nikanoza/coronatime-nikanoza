@@ -22,15 +22,27 @@ const TableCol: React.FC<{
   changeHandler: (property: keyof Sort, value: boolean) => void;
   ifSorted: { asc: boolean; dsc: boolean };
 }> = (props) => {
+  const changeSortation = () => {
+    if (props.ifSorted.asc) {
+      props.sortAsc();
+      props.changeHandler(props.btnIds.dsc as keyof Sort, true);
+    } else {
+      props.sortDsc();
+      props.changeHandler(props.btnIds.asc as keyof Sort, true);
+    }
+  };
   return (
     <div className="flex items-center justify-center text-center gap-1 md:gap-3 md:pt-5 md:pb-5 md:pl-8 md:pr-8">
-      <div className="text-semibold capitalize cursor-pointer">
+      <div
+        className="text-semibold capitalize cursor-pointer"
+        onClick={changeSortation}
+      >
         {props.text}
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
         <button
           onClick={() => {
-            props.sortDsc();
+            props.sortAsc();
             props.changeHandler(props.btnIds.asc as keyof Sort, true);
           }}
           id={props.btnIds.asc}
@@ -43,7 +55,7 @@ const TableCol: React.FC<{
         </button>
         <button
           onClick={() => {
-            props.sortAsc();
+            props.sortDsc();
             props.changeHandler(props.btnIds.dsc as keyof Sort, true);
           }}
         >

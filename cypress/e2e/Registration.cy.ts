@@ -41,7 +41,7 @@ describe('login page testing', () => {
     cy.url().should('include', 'registration');
     cy.contains('this username is already taken.');
   });
-  it('user can not register if email is olready taken', () => {
+  it('user can not register if email is already taken', () => {
     cy.get('[id="username"]').type('donovani');
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');

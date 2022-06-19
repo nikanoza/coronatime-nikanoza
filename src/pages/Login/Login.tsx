@@ -33,12 +33,12 @@ const Login = () => {
   };
 
   const onSubmit: SubmitHandler<FormValues> = () => {
-    const sign_in = login(process.env.REACT_APP_LOGIN_URL || '', {
+    const signIn = login(process.env.REACT_APP_LOGIN_URL || '', {
       username: getValues('username'),
       password: getValues('password'),
     });
-    const let_me_in = async () => {
-      const data = await sign_in;
+    const logInHandler = async () => {
+      const data = await signIn;
       if (typeof data === 'string') {
         setError('password', {
           type: 'custom',
@@ -60,7 +60,7 @@ const Login = () => {
         navigate('/dashboard/world');
       }
     };
-    let_me_in();
+    logInHandler();
   };
   return (
     <div className="w-full h-full flex">
@@ -78,7 +78,7 @@ const Login = () => {
             <Input
               label="username"
               text={t('username')}
-              inputClass={`w-full lg:w-3/4 xl:w-2/3 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-full sm:w-1/2 lg:w-3/4 xl:w-2/3 h-9 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -107,7 +107,7 @@ const Login = () => {
             <Input
               label="password"
               text={t('password')}
-              inputClass={`w-full sm:w-1/2 lg:w-3/4 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-full sm:w-1/2 lg:w-3/4 h-9 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
                 errors.password,
                 touchedFields.password && getValues('password') !== ''
               )} outline-none`}
@@ -127,11 +127,11 @@ const Login = () => {
               {errors.password && <img src={Warning} alt="" />}
               {errors.password && errors.password.message}
             </div>
-            <div className="w-full flex items-center text-center mt-4 whitespace-nowrap justify-between sm:flex-row sm:justify-between lg:mt-5">
+            <div className="w-full md:w-1/2 lg:w-full flex items-center text-center mt-4 whitespace-nowrap justify-between sm:flex-row sm:justify-between lg:mt-5">
               <Input
                 label="remember"
                 text={t('Remember this device')}
-                inputClass="w-5 h-5 mr-2 accent-green-600"
+                inputClass="w-5 h-5 mr-2 accent-green-600 border-none"
                 className="flex flex-row-reverse"
                 type="checkbox"
                 register={register}
@@ -145,13 +145,13 @@ const Login = () => {
                 {t('Forgot password?')}
               </Link>
             </div>
-            <div className="w-full">
+            <div className="w-full  md:w-1/2 lg:w-full">
               <Button type="submit" id="login_btn" className="w-full">
                 {t('log in')}
               </Button>
             </div>
           </form>
-          <div className="flex mt-6 items-center justify-center w-5/6 lg:w-3/4">
+          <div className="flex mt-6 items-center justify-center w-5/6 md:w-1/2 lg:w-3/4">
             {t('Don’t have and account?')}
             <Link to={'/registration'} className="text-[#2029F3] ml-2">
               {t('Sign up for free')}

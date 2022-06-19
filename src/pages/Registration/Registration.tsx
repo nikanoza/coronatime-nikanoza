@@ -65,10 +65,10 @@ const Registration = () => {
     sent();
   };
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="h-full w-5/6 lg:w-3/5 pt-2 flex items-start justify-center">
-        <div className="flex flex-col text-sm w-5/6 justify-between">
-          <div className="flex items-center justify-between 2xl:mt-10">
+    <div className="w-full h-full flex">
+      <div className="w-full h-full lg:w-3/5 pt-3 pb-3 items-center justify-center">
+        <div className="ml-4 sm:ml-12 flex flex-col text-xs md:text-sm p-2">
+          <div className="flex items-center justify-between pr-12">
             <img src={Coronatime} alt="" className="" />
             <Language />
           </div>
@@ -80,7 +80,7 @@ const Registration = () => {
             <Input
               label="username"
               className="mt-1 flex flex-col"
-              inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 h-9 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -102,7 +102,7 @@ const Registration = () => {
               }
               iconClass="w-4 h-4 -ml-6"
             />
-            <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3">
+            <div className="mt-1 text-[#CC1E1E] h-5 ml-5 flex gap-3 w-11/12 lg:w-1/2">
               {errors.username && <img src={Warning} alt="" />}
               {(errors.username && errors.username.message) || (
                 <span className="text-[#808189]">
@@ -112,7 +112,7 @@ const Registration = () => {
             </div>
             <Input
               label="email"
-              className="mt-14 mm:mt-10 md:mt-6 flex flex-col"
+              className="mt-8 mm:mt-10 md:mt-6 flex flex-col"
               inputClass={`w-11/12 lg:w-1/2 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.email,
                 touchedFields.email && getValues('email') !== ''

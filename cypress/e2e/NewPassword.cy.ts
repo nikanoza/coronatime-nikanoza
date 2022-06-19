@@ -23,7 +23,7 @@ describe('login page testing', () => {
     cy.get('[id="new_password"]').type('1234');
     cy.get('[id="repeat_password"]').type('1234');
     cy.get('[id="save_new_password_btn"]').click();
-    cy.contains('Your password has been updeted successfully');
+    cy.contains('Your password has been updated successfully');
   });
   it('check password did not match error', () => {
     cy.get('[id="new_password"]').type('1238');

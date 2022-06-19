@@ -1,5 +1,6 @@
 import { Coronatime } from 'assets';
 import { Language } from 'components';
+import React, { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
@@ -13,6 +14,7 @@ const Dashboard = () => {
     login: 'false',
     username: '',
   };
+  const menuRef = React.createRef<HTMLMenuElement>();
   const storage = localStorage.getItem('user');
   if (storage) {
     user = JSON.parse(storage);
@@ -28,9 +30,17 @@ const Dashboard = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('statistics');
   };
+  const closeMenu: MouseEventHandler<HTMLDivElement> = (event) => {
+    if (event.target !== menuRef.current && !collapseMenu) {
+      setCollapseMenu(true);
+    }
+  };
 
   return (
-    <div className="w-full h-full flex flex-col p-1 md:p-10">
+    <div
+      className="w-full h-full flex flex-col p-1 md:p-10"
+      onClick={closeMenu}
+    >
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
         <div className="ml-auto mr-3">
@@ -42,6 +52,7 @@ const Dashboard = () => {
               ? 'hidden'
               : 'border p-2 absolute right-1 top-1 bg-slate-200'
           } md:flex`}
+          ref={menuRef}
         >
           {!collapseMenu && (
             <button className="text-red-700 text-lg" onClick={toggleMenu}>
@@ -54,7 +65,9 @@ const Dashboard = () => {
           </button>
         </menu>
         <button
-          className={`flex ${!collapseMenu ? 'hidden' : ''} md:hidden`}
+          className={`flex ${
+            !collapseMenu ? 'hidden' : ''
+          } md:hidden bg-white-400`}
           onClick={toggleMenu}
         >
           <div className="space-y-2" id="h-menu">

@@ -1,5 +1,3 @@
-// import axios from 'axios';
-// import { method } from 'cypress/types/bluebird';
 import { AxiosResponse } from 'axios';
 import { instance } from 'services';
 
