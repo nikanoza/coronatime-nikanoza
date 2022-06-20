@@ -29,11 +29,14 @@ const Reset = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormsValues> = (): void => {
-    const recoveryReq = recovery(process.env.REACT_APP_RECOVERY_LINK || '', {
-      email: getValues('email'),
-      backlink: process.env.REACT_APP_PASSWORD_RECOVERY_BACKLINK || '',
-    });
+  const onSubmit: SubmitHandler<FormsValues> = (data): void => {
+    const recoveryReq = recovery(
+      process.env.REACT_APP_API_URL + '/password/send-recovery-link' || '',
+      {
+        email: data.email,
+        backlink: process.env.REACT_APP_LOCAL_URL + '/new-password' || '',
+      }
+    );
 
     const sentReq = async () => {
       const data = await recoveryReq;

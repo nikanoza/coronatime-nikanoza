@@ -32,10 +32,10 @@ const Login = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = () => {
-    const signIn = login(process.env.REACT_APP_LOGIN_URL || '', {
-      username: getValues('username'),
-      password: getValues('password'),
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const signIn = login(process.env.REACT_APP_API_URL + '/login' || '', {
+      username: data.username,
+      password: data.password,
     });
     const logInHandler = async () => {
       const data = await signIn;

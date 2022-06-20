@@ -35,11 +35,14 @@ const NewPassword = () => {
   };
 
   const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void => {
-    const req = setNewPassword(process.env.REACT_APP_SET_NEW_PASSWORD || '', {
-      hash: hash || '',
-      password: getValues('new_password'),
-      repeatPassword: getValues('repeat_password'),
-    });
+    const req = setNewPassword(
+      process.env.REACT_APP_API_URL + '/password/recover' || '',
+      {
+        hash: hash || '',
+        password: data.new_password,
+        repeatPassword: data.repeat_password,
+      }
+    );
 
     const sent = async () => {
       const data = await req;

@@ -28,26 +28,10 @@ type Statistics = {
   recovered: number;
 };
 const countryArray: CountryType[] = [];
-type Sort = {
-  name_asc: false;
-  name_dsc: false;
-  cases_asc: false;
-  cases_dsc: false;
-  death_asc: false;
-  death_dsc: false;
-  recovered_asc: false;
-  recovered_dsc: false;
-};
 
-const sortationState = {
-  name_asc: false,
-  name_dsc: false,
-  cases_asc: false,
-  cases_dsc: false,
-  death_asc: false,
-  death_dsc: false,
-  recovered_asc: false,
-  recovered_dsc: false,
+const sortingState = {
+  name: '',
+  direction: '',
 };
 
 const Country = () => {
@@ -55,11 +39,9 @@ const Country = () => {
   const { t } = useTranslation();
   const [statistics, setStatistics] = useState(countryArray);
   const [statisticsClone, setStatisticsClone] = useState(countryArray);
-  const [sortOptions, setSortOptions] = useState(sortationState);
-  const changeSortation = (property: keyof Sort, value: boolean) => {
-    const obj = { ...sortationState };
-    obj[property] = value;
-    setSortOptions(obj);
+  const [sortOptions, setSortOptions] = useState(sortingState);
+  const changeSortation = (name: string, value: string) => {
+    setSortOptions({ name: name, direction: value });
   };
   let token = localStorage.getItem('token');
   useEffect(() => {
@@ -72,13 +54,14 @@ const Country = () => {
   useEffect(() => {
     if (firstly && token) {
       const data = getCountriesStatistics(
-        process.env.REACT_APP_COUNTRY_URL || '',
+        process.env.REACT_APP_API_URL + '/countries' || '',
         token
       );
       const getData = async () => {
-        localStorage.setItem('statistics', JSON.stringify(await data));
-        setStatistics(await data);
-        setStatisticsClone(await data);
+        const stats = await data;
+        localStorage.setItem('statistics', JSON.stringify(stats));
+        setStatistics(stats);
+        setStatisticsClone(stats);
       };
       getData();
       firstly = false;
@@ -130,7 +113,7 @@ const Country = () => {
     setStatisticsClone(newArray);
   };
   return (
-    <div className="h-1/3 text-xs">
+    <div className="h-1/3 text-xs lg:text-base">
       <input
         type="text"
         placeholder={t('Search by country')}
@@ -145,7 +128,7 @@ const Country = () => {
             sortDsc={sortNameDsc}
             btnIds={{ asc: 'name_asc', dsc: 'name_dsc' }}
             changeHandler={changeSortation}
-            ifSorted={{ asc: sortOptions.name_asc, dsc: sortOptions.name_dsc }}
+            ifSorted={sortOptions}
           />
           <TableCol
             text={t('new cases')}
@@ -153,10 +136,7 @@ const Country = () => {
             sortDsc={() => sortationFc('confirmed', false)}
             btnIds={{ asc: 'cases_asc', dsc: 'cases_dsc' }}
             changeHandler={changeSortation}
-            ifSorted={{
-              asc: sortOptions.cases_asc,
-              dsc: sortOptions.cases_dsc,
-            }}
+            ifSorted={sortOptions}
           />
           <TableCol
             text={t('death')}
@@ -164,10 +144,7 @@ const Country = () => {
             sortDsc={() => sortationFc('deaths', false)}
             btnIds={{ asc: 'death_asc', dsc: 'death_dsc' }}
             changeHandler={changeSortation}
-            ifSorted={{
-              asc: sortOptions.death_asc,
-              dsc: sortOptions.death_dsc,
-            }}
+            ifSorted={sortOptions}
           />
           <TableCol
             text={t('recovered')}
@@ -175,10 +152,7 @@ const Country = () => {
             sortDsc={() => sortationFc('recovered', false)}
             btnIds={{ asc: 'recovered_asc', dsc: 'recovered_dsc' }}
             changeHandler={changeSortation}
-            ifSorted={{
-              asc: sortOptions.recovered_asc,
-              dsc: sortOptions.recovered_dsc,
-            }}
+            ifSorted={sortOptions}
           />
         </div>
         <div className="mt-2 w-full h-full overflow-y-scroll">
@@ -195,12 +169,12 @@ const Country = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center border-b">
-                <div className="w-1/3 flex justify-start md:ml-8">
+                <div className="w-1/3 flex justify-start md:pl-8">
                   {country.statistics.deaths}
                 </div>
               </div>
               <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
-                <div className="1/3 flex justify-start lg:ml-24">
+                <div className="1/3 flex justify-start lg:pl-24">
                   {country.statistics.recovered}
                 </div>
               </div>

@@ -6,15 +6,15 @@ import { onRegistration } from 'services';
 
 import { useTranslation } from 'react-i18next';
 
+type FormValues = {
+  username: string;
+  email: string;
+  password: string;
+  repeat_password: string;
+};
+
 const Registration = () => {
   const { t } = useTranslation();
-
-  type FormValues = {
-    username: string;
-    email: string;
-    password: string;
-    repeat_password: string;
-  };
 
   const navigate = useNavigate();
 
@@ -35,14 +35,18 @@ const Registration = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (): void => {
-    const req = onRegistration(process.env.REACT_APP_REGISTRATION || '', {
-      username: getValues('username'),
-      email: getValues('email'),
-      password: getValues('password'),
-      repeatPassword: getValues('repeat_password'),
-      redirectOnConfirm: process.env.REACT_APP_REDIRECT_CONFIRM || '',
-    });
+  const onSubmit: SubmitHandler<FormValues> = (data): void => {
+    const req = onRegistration(
+      process.env.REACT_APP_API_URL + '/register' || '',
+      {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        repeatPassword: data.repeat_password,
+        redirectOnConfirm:
+          process.env.REACT_APP_LOCAL_URL + '/confirmation' || '',
+      }
+    );
 
     const sent = async () => {
       const data = await req;

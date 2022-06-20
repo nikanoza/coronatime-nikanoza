@@ -26,6 +26,7 @@ function App() {
   if (language) {
     i18next.changeLanguage(language);
   }
+  // const loginStatus = JSON.parse(localStorage.getItem('user') || '').login;
   return (
     <div className="h-full">
       <Routes>

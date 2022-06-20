@@ -1,14 +1,8 @@
 import { Arrow, Dark } from 'assets';
 
 type Sort = {
-  name_asc: false;
-  name_dsc: false;
-  cases_asc: false;
-  cases_dsc: false;
-  death_asc: false;
-  death_dsc: false;
-  recovered_asc: false;
-  recovered_dsc: false;
+  name: string;
+  direction: string;
 };
 
 const TableCol: React.FC<{
@@ -19,16 +13,19 @@ const TableCol: React.FC<{
     asc: string;
     dsc: string;
   };
-  changeHandler: (property: keyof Sort, value: boolean) => void;
-  ifSorted: { asc: boolean; dsc: boolean };
+  changeHandler: (name: string, value: string) => void;
+  ifSorted: Sort;
 }> = (props) => {
   const changeSortation = () => {
-    if (props.ifSorted.asc) {
+    if (
+      props.ifSorted.name === props.text &&
+      props.ifSorted.direction !== 'asc'
+    ) {
       props.sortAsc();
-      props.changeHandler(props.btnIds.dsc as keyof Sort, true);
+      props.changeHandler(props.text, 'asc');
     } else {
       props.sortDsc();
-      props.changeHandler(props.btnIds.asc as keyof Sort, true);
+      props.changeHandler(props.text, 'dsc');
     }
   };
   return (
@@ -43,12 +40,17 @@ const TableCol: React.FC<{
         <button
           onClick={() => {
             props.sortAsc();
-            props.changeHandler(props.btnIds.asc as keyof Sort, true);
+            props.changeHandler(props.text, 'asc');
           }}
           id={props.btnIds.asc}
         >
           <img
-            src={props.ifSorted.asc ? Dark : Arrow}
+            src={
+              props.ifSorted.name === props.text &&
+              props.ifSorted.direction === 'asc'
+                ? Dark
+                : Arrow
+            }
             alt=""
             className="rotate-180"
           />
@@ -56,11 +58,16 @@ const TableCol: React.FC<{
         <button
           onClick={() => {
             props.sortDsc();
-            props.changeHandler(props.btnIds.dsc as keyof Sort, true);
+            props.changeHandler(props.text, 'dsc');
           }}
         >
           <img
-            src={props.ifSorted.dsc ? Dark : Arrow}
+            src={
+              props.ifSorted.name === props.text &&
+              props.ifSorted.direction === 'dsc'
+                ? Dark
+                : Arrow
+            }
             alt=""
             id={props.btnIds.dsc}
           />

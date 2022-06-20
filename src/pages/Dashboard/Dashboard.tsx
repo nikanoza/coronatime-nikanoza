@@ -43,7 +43,7 @@ const Dashboard = () => {
     >
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
-        <div className="ml-auto mr-3">
+        <div className={!collapseMenu ? 'ml-auto mr-24' : 'ml-auto mr-3'}>
           <Language />
         </div>
         <menu

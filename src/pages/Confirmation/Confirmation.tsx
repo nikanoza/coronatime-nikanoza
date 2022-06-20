@@ -15,7 +15,10 @@ const Confirmation = () => {
 
   useEffect(() => {
     if (hash) {
-      onAccountConfirm(process.env.REACT_APP_CONFIRM_ACCOUNT || '', { hash });
+      onAccountConfirm(
+        process.env.REACT_APP_API_URL + '/confirm-account' || '',
+        { hash }
+      );
     }
   });
   return (
