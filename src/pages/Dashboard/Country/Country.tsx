@@ -1,38 +1,16 @@
 import { useEffect, useState } from 'react';
 import { TableCol } from 'pages/Dashboard/Country/components';
-import { getCountriesStatistics } from 'services';
+import { CountryType, Statistics } from 'types';
 
 import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
-
-let firstly = true;
-
-type CountryType = {
-  code: string;
-  name: {
-    en: string;
-    ka: string;
-  };
-  statistics: {
-    confirmed: number;
-    critical: number;
-    deaths: number;
-    recovered: number;
-  };
-  id: string;
-};
-type Statistics = {
-  confirmed: number;
-  critical: number;
-  deaths: number;
-  recovered: number;
-};
-const countryArray: CountryType[] = [];
 
 const sortingState = {
   name: '',
   direction: '',
 };
+
+const countryArray: CountryType[] = [];
 
 const Country = () => {
   const language = i18next.language;
@@ -43,7 +21,6 @@ const Country = () => {
   const changeSortation = (name: string, value: string) => {
     setSortOptions({ name: name, direction: value });
   };
-  let token = localStorage.getItem('token');
   useEffect(() => {
     const storageStatistics = localStorage.getItem('statistics');
     if (storageStatistics) {
@@ -51,22 +28,6 @@ const Country = () => {
       setStatisticsClone(JSON.parse(storageStatistics));
     }
   }, []);
-  useEffect(() => {
-    if (firstly && token) {
-      const data = getCountriesStatistics(
-        process.env.REACT_APP_API_URL + '/countries' || '',
-        token
-      );
-      const getData = async () => {
-        const stats = await data;
-        localStorage.setItem('statistics', JSON.stringify(stats));
-        setStatistics(stats);
-        setStatisticsClone(stats);
-      };
-      getData();
-      firstly = false;
-    }
-  }, [token]);
 
   const sortNameAsc = () => {
     const newArray = statistics
@@ -120,8 +81,8 @@ const Country = () => {
         className="border rounded-md pt-3 pb-3 pl-6 mt-10 md:w-1/4"
         onChange={countryFilterHandler}
       />
-      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full">
-        <div className="grid grid-cols-4 lg:grid-cols-6 bg-[#F6F6F7]">
+      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-40 md:h-96">
+        <div className="flex bg-[#F6F6F7]">
           <TableCol
             text={t('location')}
             sortAsc={sortNameAsc}
@@ -155,29 +116,31 @@ const Country = () => {
             ifSorted={sortOptions}
           />
         </div>
-        <div className="mt-2 w-full h-full overflow-y-scroll">
+        <div className="mt-2 w-full h-4/5 overflow-y-scroll">
           {statisticsClone.map((country: CountryType, index) => (
-            <div key={index} className="grid grid-cols-4 lg:grid-cols-6">
-              <div className="flex items-center justify-center text-center border-b md:whitespace-nowrap">
-                <div className="w-1/3 flex justify-start">
+            <div key={index} className="flex">
+              <div className="w-1/4 lg:w-1/6 flex items-center justify-center text-center border-b md:whitespace-nowrap">
+                <div className="flex justify-start w-2/3 md:w-1/3">
                   {language === 'en' ? country.name.en : country.name.ka}
                 </div>
               </div>
-              <div className="flex items-center justify-center border-b">
-                <div className="w-1/3 flex justify-start">
+              <div className="w-1/4 lg:w-1/6 flex items-center justify-center border-b">
+                <div className="flex justify-start">
                   {country.statistics.confirmed}
                 </div>
               </div>
-              <div className="flex items-center justify-center border-b">
-                <div className="w-1/3 flex justify-start md:pl-8">
+              <div className="w-1/4 lg:w-1/6 flex items-center justify-center border-b">
+                <div className="flex justify-start">
                   {country.statistics.deaths}
                 </div>
               </div>
-              <div className="flex items-center justify-center border-b lg:col-span-3 lg:justify-start">
-                <div className="1/3 flex justify-start lg:pl-24">
+              <div className="w-1/4 lg:w-1/6 flex items-center justify-center border-b">
+                <div className="flex justify-start">
                   {country.statistics.recovered}
                 </div>
               </div>
+              <div className="w-1/6 border-b hidden lg:flex"></div>
+              <div className="w-1/6 border-b hidden lg:flex"></div>
             </div>
           ))}
         </div>

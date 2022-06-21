@@ -3,22 +3,18 @@ import { Input, Button, Language } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from 'services';
+import { LoginFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
 
 const Login = () => {
-  type FormValues = {
-    username: string;
-    password: string;
-    remember: boolean;
-  };
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
     setError,
-  } = useForm<FormValues>({
+  } = useForm<LoginFormValues>({
     shouldFocusError: false,
   });
 
@@ -32,7 +28,7 @@ const Login = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
     const signIn = login(process.env.REACT_APP_API_URL + '/login' || '', {
       username: data.username,
       password: data.password,

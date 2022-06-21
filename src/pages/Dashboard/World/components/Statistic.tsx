@@ -3,7 +3,7 @@ const Statistic: React.FC<{
   className: string;
   textColor: string;
   text: string;
-  amount: string;
+  amount: number;
 }> = (props) => {
   return (
     <div

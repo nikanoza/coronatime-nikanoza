@@ -1,13 +1,18 @@
 import { Coronatime } from 'assets';
 import { Language } from 'components';
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useEffect } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { getCountriesStatistics } from 'services';
+import { CountryType } from 'types';
+
+let firstly = true;
 
 const Dashboard = () => {
   const { category } = useParams();
   const [collapseMenu, setCollapseMenu] = useState(true);
+  const [statState, setStatsState] = useState<CountryType[] | null>(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
   let user: { login: string; username: string } = {
@@ -19,7 +24,22 @@ const Dashboard = () => {
   if (storage) {
     user = JSON.parse(storage);
   }
-
+  let token = localStorage.getItem('token');
+  useEffect(() => {
+    if (firstly && token) {
+      const data = getCountriesStatistics(
+        process.env.REACT_APP_API_URL + '/countries' || '',
+        token
+      );
+      const getData = async () => {
+        const statsData = await data;
+        localStorage.setItem('statistics', JSON.stringify(statsData));
+        setStatsState(statsData);
+      };
+      getData();
+      firstly = false;
+    }
+  }, [token]);
   const toggleMenu = () => {
     setCollapseMenu(!collapseMenu);
   };
@@ -109,7 +129,7 @@ const Dashboard = () => {
           {t('By country')}
         </NavLink>
       </ul>
-      <Outlet />
+      <Outlet context={{ statState }} />
     </div>
   );
 };

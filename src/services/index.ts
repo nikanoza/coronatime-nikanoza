@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const instance = axios.create({
   baseURL: 'https://coronatime-api.devtest.ge/api/',
@@ -19,10 +19,8 @@ export const onAccountConfirm = async (
       url: url,
       method: 'POST',
       data: data,
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (err) {
     return err;
   }
@@ -37,10 +35,8 @@ export const getCountriesStatistics = async (url: string, token: string) => {
         Accept: 'application/json',
         Authorization: `Bearer ${token}`,
       },
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -55,10 +51,8 @@ export const login = async (
       url: url,
       method: 'POST',
       data: data,
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (err) {
     return 'please, provide correct credentials...';
   }
@@ -73,10 +67,8 @@ export const recovery = async (
       url: url,
       method: 'POST',
       data: data,
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (err) {
     return 'email not fount';
   }
@@ -97,10 +89,8 @@ export const onRegistration = async (
       url: url,
       method: 'POST',
       data: data,
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (err) {
     return err.response.data[0].context.label;
   }
@@ -115,10 +105,8 @@ export const setNewPassword = async (
       url: url,
       method: 'POST',
       data: data,
-    }).then((res: AxiosResponse<any>) => {
-      return res.data;
     });
-    return response;
+    return response.data;
   } catch (err) {
     return 'invalid data provided.';
   }

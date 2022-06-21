@@ -3,18 +3,13 @@ import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { Input, Button, Language } from 'components';
 import { Link, useNavigate } from 'react-router-dom';
 import { onRegistration } from 'services';
+import { RegistrationFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
 
-type FormValues = {
-  username: string;
-  email: string;
-  password: string;
-  repeat_password: string;
-};
-
 const Registration = () => {
   const { t } = useTranslation();
+  const loginStatus = JSON.parse();
 
   const navigate = useNavigate();
 
@@ -24,7 +19,7 @@ const Registration = () => {
     formState: { errors, touchedFields },
     getValues,
     setError,
-  } = useForm<FormValues>({
+  } = useForm<RegistrationFormValues>({
     shouldFocusError: false,
   });
 
@@ -35,7 +30,7 @@ const Registration = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data): void => {
+  const onSubmit: SubmitHandler<RegistrationFormValues> = (data): void => {
     const req = onRegistration(
       process.env.REACT_APP_API_URL + '/register' || '',
       {

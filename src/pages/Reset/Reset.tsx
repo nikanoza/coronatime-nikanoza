@@ -2,23 +2,20 @@ import { Coronatime, Warning } from 'assets';
 import { Input, Button } from 'components';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { recovery } from 'services';
+import { ResetFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const Reset = () => {
   const { t } = useTranslation();
-
-  type FormsValues = {
-    email: string;
-  };
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
     setError,
-  } = useForm<FormsValues>();
+  } = useForm<ResetFormValues>();
 
   const navigate = useNavigate();
 
@@ -29,7 +26,7 @@ const Reset = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormsValues> = (data): void => {
+  const onSubmit: SubmitHandler<ResetFormValues> = (data): void => {
     const recoveryReq = recovery(
       process.env.REACT_APP_API_URL + '/password/send-recovery-link' || '',
       {

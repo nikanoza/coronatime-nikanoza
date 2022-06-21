@@ -3,6 +3,7 @@ import { Button, Input } from 'components';
 import { useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { setNewPassword } from 'services';
+import { NewPasswordFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,18 +15,13 @@ const NewPassword = () => {
   const hash = params.get('hash');
 
   const { t } = useTranslation();
-
-  type FormsValues = {
-    new_password: string;
-    repeat_password: string;
-  };
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
     getValues,
     setError,
-  } = useForm<FormsValues>();
+  } = useForm<NewPasswordFormValues>();
 
   const setErrorStyle = (
     error: FieldError | undefined,
@@ -34,7 +30,9 @@ const NewPassword = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<FormsValues> = (data: FormsValues): void => {
+  const onSubmit: SubmitHandler<NewPasswordFormValues> = (
+    data: NewPasswordFormValues
+  ): void => {
     const req = setNewPassword(
       process.env.REACT_APP_API_URL + '/password/recover' || '',
       {
