@@ -7,11 +7,11 @@ describe('login page testing', () => {
     );
   });
 
-  it('user can confirm acount', () => {
-    cy.intercept('POST', Cypress.env('api_server') + 'confirm-account', {
+  it('user can confirm account', () => {
+    cy.intercept('POST', Cypress.env('api_server') + '/confirm-account', {
       statusCode: 200,
     });
     cy.get('[id="confirm-btn"]').click();
-    cy.url().should('include', 'confirmed');
+    cy.url().should('include', 'login');
   });
 });

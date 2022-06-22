@@ -33,6 +33,7 @@ const TableCol: React.FC<{
       <div
         className="text-semibold capitalize cursor-pointer"
         onClick={changeSortation}
+        id={props.text}
       >
         {props.text}
       </div>

@@ -22,7 +22,7 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', Cypress.env('api_server') + 'register', {
+    cy.intercept('POST', Cypress.env('api_server') + '/register', {
       statusCode: 422,
       body: [
         {
@@ -46,7 +46,7 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', Cypress.env('api_server') + 'register', {
+    cy.intercept('POST', Cypress.env('api_server') + '/register', {
       statusCode: 422,
       body: [
         {
@@ -70,7 +70,7 @@ describe('login page testing', () => {
     cy.get('[id="email"]').type('nika@gmail.com');
     cy.get('[id="password"]').type('12345');
     cy.get('[id="repeat_password"]').type('12345');
-    cy.intercept('POST', Cypress.env('api_server') + 'register', {
+    cy.intercept('POST', Cypress.env('api_server') + '/register', {
       statusCode: 201,
     });
     cy.get('[id="sign_up"]').click();

@@ -80,6 +80,7 @@ const Country = () => {
         placeholder={t('Search by country')}
         className="border rounded-md pt-3 pb-3 pl-6 mt-10 md:w-1/4"
         onChange={countryFilterHandler}
+        id="filter_countries"
       />
       <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-40 md:h-96">
         <div className="flex bg-[#F6F6F7]">

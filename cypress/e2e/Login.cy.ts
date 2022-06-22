@@ -27,8 +27,8 @@ describe('login page testing', () => {
 
   it('user can login if enter valid data', () => {
     cy.get('[id="username"]').type('donovani');
-    cy.get('[id="password"]').type('1234567');
-    cy.intercept('POST', Cypress.env('api_server') + 'login', {
+    cy.get('[id="password"]').type('12345678');
+    cy.intercept('POST', Cypress.env('api_server') + '/login', {
       statusCode: 200,
       body: {
         token:
@@ -37,6 +37,12 @@ describe('login page testing', () => {
     });
     cy.get('[id="login_btn"]').click();
     cy.url().should('include', '/dashboard/world');
+    cy.visit('/login').url().should('include', 'dashboard');
+    cy.visit('/new-password').url().should('include', 'dashboard');
+    cy.visit('/confirmation').url().should('include', 'dashboard');
+    cy.visit('/registration').url().should('include', 'dashboard');
+    cy.visit('/sent-info').url().should('include', 'dashboard');
+    cy.visit('/reset').url().should('include', 'dashboard');
   });
 
   it('user can not login if enter incorect username or password', () => {

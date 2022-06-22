@@ -86,7 +86,12 @@ const Dashboard = () => {
             </button>
           )}
           <div className="flex items-center">{user.username}</div>
-          <button className="capitalize" type="button" onClick={logoutHandler}>
+          <button
+            className="capitalize"
+            type="button"
+            onClick={logoutHandler}
+            id="logout_btn"
+          >
             {t('log out')}
           </button>
         </menu>
