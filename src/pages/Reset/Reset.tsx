@@ -6,6 +6,7 @@ import { ResetFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Reset = () => {
   const { t } = useTranslation();
@@ -18,6 +19,12 @@ const Reset = () => {
   } = useForm<ResetFormValues>();
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (loginStatus && JSON.parse(loginStatus).login === true) {
+      navigate('/dashboard/world');
+    }
+  });
 
   const setErrorStyle = (
     error: FieldError | undefined,

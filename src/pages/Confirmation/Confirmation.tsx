@@ -4,7 +4,7 @@ import { onAccountConfirm } from 'services';
 
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Confirmation = () => {
   const location = useLocation();
@@ -12,6 +12,7 @@ const Confirmation = () => {
   const hash = params.get('hash');
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (hash) {
@@ -19,6 +20,12 @@ const Confirmation = () => {
         process.env.REACT_APP_API_URL + '/confirm-account' || '',
         { hash }
       );
+    }
+  });
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (loginStatus && JSON.parse(loginStatus).login === true) {
+      navigate('/dashboard/world');
     }
   });
   return (

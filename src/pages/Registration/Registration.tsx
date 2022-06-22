@@ -6,12 +6,18 @@ import { onRegistration } from 'services';
 import { RegistrationFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const Registration = () => {
   const { t } = useTranslation();
-  const loginStatus = JSON.parse();
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (loginStatus && JSON.parse(loginStatus).login === true) {
+      navigate('/dashboard/world');
+    }
+  });
 
   const {
     register,

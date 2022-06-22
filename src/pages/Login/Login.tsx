@@ -6,6 +6,7 @@ import { login } from 'services';
 import { LoginFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const Login = () => {
   const {
@@ -20,6 +21,12 @@ const Login = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (loginStatus && JSON.parse(loginStatus).login === true) {
+      navigate('/dashboard/world');
+    }
+  });
 
   const setErrorStyle = (
     error: FieldError | undefined,

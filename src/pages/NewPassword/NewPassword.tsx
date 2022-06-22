@@ -1,12 +1,12 @@
 import { Coronatime, Success, Warning } from 'assets';
 import { Button, Input } from 'components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { setNewPassword } from 'services';
 import { NewPasswordFormValues } from 'types';
 
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const NewPassword = () => {
   const [sentReq, setSentReq] = useState(false);
@@ -29,6 +29,15 @@ const NewPassword = () => {
   ) => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (loginStatus && JSON.parse(loginStatus).login === true) {
+      navigate('/dashboard/world');
+    }
+  });
 
   const onSubmit: SubmitHandler<NewPasswordFormValues> = (
     data: NewPasswordFormValues

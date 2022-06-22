@@ -1,4 +1,4 @@
-![This is header image](/src/assets/images/coronatime.png)
+![This is header image](/src/assets/coronatime.png)
 
 ## Coronatime App
 
@@ -25,7 +25,7 @@ Coronatime is app, which display countries covid statistics for authorized users
 
 * <img src="readme/react.png" width="25" style="top: 8px" /> *React @ 18.0.0 - front-end framework*
 * <img src="readme/i18next.png" width="25" style="top: 8px" /> *i18next @21.8.5 - library for translation*
-* <img src="readme/cypress.png" width="25" style="top: 8px" /> *Cyprss @10.0.3 - end to end testing Framework*
+* <img src="readme/cypress.png" width="25" style="top: 8px" /> *Cypress @10.0.3 - end to end testing Framework*
 * <img src="readme/tailwind.png" width="25" style="top: 8px" /> *Tailwind @3.0.24 - CSS framework*
 * <img src="readme/react-hook-form.png" width="25" style="top: 8px" /> *React-hook-form @7.31.2 - library for forms*
 * <img src="readme/react.png" width="25" style="top: 8px" /> *React-select @5.3.2 - Select Input control*
@@ -57,10 +57,11 @@ npm install
 |   |---|---|--- page-name.js # react component
 |   |---|---|--- index.js # export default component
 |   |---|--- index.js # export all pages
-|   |--- hooks # custom hooks
 |   |--- locals # translation files
+|   |--- services # request functions
+|   |--- types # types files
 - .eslintrc.json  # eslint config file
-- .prettierrc.js  # prettier config file
+- .prettierrc.json  # prettier config file
 - tailwind.config.js # tailwind config file
 - package.json     # dependency manager configurations
 ```

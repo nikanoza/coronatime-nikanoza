@@ -14,6 +14,12 @@ const Dashboard = () => {
   const [collapseMenu, setCollapseMenu] = useState(true);
   const [statState, setStatsState] = useState<CountryType[] | null>(null);
   const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('user') || '';
+    if (!loginStatus) {
+      navigate('/login');
+    }
+  });
   const { t } = useTranslation();
   let user: { login: string; username: string } = {
     login: 'false',
