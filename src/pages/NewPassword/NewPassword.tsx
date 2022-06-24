@@ -39,11 +39,11 @@ const NewPassword = () => {
     }
   });
 
-  const onSubmit: SubmitHandler<NewPasswordFormValues> = (
+  const onSubmit: SubmitHandler<NewPasswordFormValues> = async (
     data: NewPasswordFormValues
-  ): void => {
+  ): Promise<void> => {
     try {
-      setNewPassword({
+      await setNewPassword({
         hash: hash || '',
         password: data.new_password,
         repeatPassword: data.repeat_password,

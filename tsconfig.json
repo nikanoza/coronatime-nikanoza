@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "types": ["cypress", "node"],
+    "types": ["node"],
     "useUnknownInCatchVariables": false,
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,5 +24,5 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "**/*.ts" ]
+    "**/*.ts",  "**/*.tsx"]
 }

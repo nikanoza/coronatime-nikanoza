@@ -15,8 +15,8 @@ const Statistic: React.FC<{
       id={props.text}
     >
       <img src={props.img} alt="" className="w-1/2" />
-      <p className="capitalize">{props.text}</p>
-      <div className={props.textColor + ' text-lg md:text-2xl font-bold'}>
+      <p className="capitalize md:text-2xl">{props.text}</p>
+      <div className={props.textColor + ' text-lg md:text-4xl font-bold'}>
         {props.amount}
       </div>
     </div>

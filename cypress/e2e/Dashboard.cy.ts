@@ -3,6 +3,7 @@
 describe('dashboard page testing', () => {
   beforeEach(() => {
     cy.visit('/login');
+    cy.viewport(500, 750);
     cy.fixture('countries').then((json) => {
       cy.intercept('GET', Cypress.env('api_server') + '/countries/', {
         statusCode: 200,
@@ -30,7 +31,6 @@ describe('dashboard page testing', () => {
         JSON.parse(localStorage.getItem('statistics') || '')[0].code
       ).to.eq('AF');
     });
-    cy.get('[id="h-menu"]').click();
     cy.get('.css-b62m3t-container').click();
     cy.get('[id="geo"]').click();
     cy.get('[id="name_asc"]').click();
@@ -40,7 +40,6 @@ describe('dashboard page testing', () => {
     cy.get('[id="death_asc"]').click();
     cy.get('[id="death_dsc"]').click();
     cy.get('[id="filter_countries"]').type('ავ');
-    cy.get('[id="h-menu"]').click();
     cy.get('.css-b62m3t-container').click();
     cy.get('[id="eng"]').click();
     cy.get('[id="name_asc"]').click();

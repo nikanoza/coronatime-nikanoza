@@ -8,12 +8,13 @@ describe('new password page testing', () => {
   });
 
   it('user can not update password if enter data is invalid', () => {
+    cy.get('[id="new_password"]').type('12345');
+    cy.get('[id="repeat_password"]').type('12345');
     cy.intercept('POST', Cypress.env('api_server') + '/password/recover', {
       statusCode: 422,
-    });
-    cy.get('[id="new_password"]').type('1234');
-    cy.get('[id="repeat_password"]').type('1234');
+    }).as('sent');
     cy.get('[id="save_new_password_btn"]').click();
+    cy.wait('@sent');
     cy.contains('invalid data provided.');
   });
   it('user can change password if all data is valid', () => {
