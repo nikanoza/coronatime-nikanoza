@@ -36,38 +36,33 @@ const Registration = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<RegistrationFormValues> = (data): void => {
-    const req = onRegistration(
-      process.env.REACT_APP_API_URL + '/register' || '',
-      {
+  const onSubmit: SubmitHandler<RegistrationFormValues> = async (
+    data
+  ): Promise<void> => {
+    try {
+      await onRegistration({
         username: data.username,
         email: data.email,
         password: data.password,
         repeatPassword: data.repeat_password,
         redirectOnConfirm:
           process.env.REACT_APP_LOCAL_URL + '/confirmation' || '',
-      }
-    );
-
-    const sent = async () => {
-      const data = await req;
-      if (data === '') {
-        navigate('/sent-info');
+      });
+      navigate('/sent-info');
+    } catch (error) {
+      const label = error.response.data[0].context.label;
+      if (label === 'username') {
+        setError('username', {
+          type: 'custom',
+          message: t('this username is already taken.'),
+        });
       } else {
-        if (data === 'username') {
-          setError('username', {
-            type: 'custom',
-            message: t('this username is already taken.'),
-          });
-        } else {
-          setError('email', {
-            type: 'custom',
-            message: t('this email is already taken.'),
-          });
-        }
+        setError('email', {
+          type: 'custom',
+          message: t('this email is already taken.'),
+        });
       }
-    };
-    sent();
+    }
   };
   return (
     <div className="w-full h-full flex">

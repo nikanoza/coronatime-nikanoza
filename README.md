@@ -44,6 +44,10 @@ npm install
 ```
 3. Also you need to create .env file where copy information from .env.example file
 
+```
+cp .env.example .env
+```
+
 #
 ### Project Structure
 

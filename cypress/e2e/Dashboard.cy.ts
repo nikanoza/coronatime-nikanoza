@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('login page testing', () => {
+describe('dashboard page testing', () => {
   beforeEach(() => {
     cy.visit('/login');
     cy.fixture('countries').then((json) => {

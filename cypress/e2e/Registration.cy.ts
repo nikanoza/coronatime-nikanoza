@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('login page testing', () => {
+describe('Registration page testing', () => {
   beforeEach(() => {
     cy.visit('/registration');
   });

@@ -19,7 +19,7 @@ const Dashboard = () => {
     if (!loginStatus) {
       navigate('/login');
     }
-  });
+  }, [navigate]);
   const { t } = useTranslation();
   let user: { login: string; username: string } = {
     login: 'false',
@@ -32,20 +32,18 @@ const Dashboard = () => {
   }
   let token = localStorage.getItem('token');
   useEffect(() => {
-    if (firstly && token) {
-      const data = getCountriesStatistics(
-        process.env.REACT_APP_API_URL + '/countries' || '',
-        token
-      );
-      const getData = async () => {
-        const statsData = await data;
-        localStorage.setItem('statistics', JSON.stringify(statsData));
-        setStatsState(statsData);
-      };
-      getData();
-      firstly = false;
+    async function getData(token: string) {
+      try {
+        const response = await getCountriesStatistics(token);
+        localStorage.setItem('statistics', JSON.stringify(response.data));
+        setStatsState(response.data);
+        firstly = false;
+      } catch (error) {}
     }
-  }, [token]);
+    if (firstly && token) {
+      getData(token);
+    }
+  }, [statState, token]);
   const toggleMenu = () => {
     setCollapseMenu(!collapseMenu);
   };
@@ -69,7 +67,7 @@ const Dashboard = () => {
     >
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
-        <div className={!collapseMenu ? 'ml-auto mr-24' : 'ml-auto mr-3'}>
+        <div className={'ml-auto mr-3'}>
           <Language />
         </div>
         <menu
@@ -140,7 +138,7 @@ const Dashboard = () => {
           {t('By country')}
         </NavLink>
       </ul>
-      <Outlet context={{ statState }} />
+      {!firstly && <Outlet context={{ statState }} />}
     </div>
   );
 };

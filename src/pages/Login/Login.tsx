@@ -35,35 +35,31 @@ const Login = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
-    const signIn = login(process.env.REACT_APP_API_URL + '/login' || '', {
-      username: data.username,
-      password: data.password,
-    });
-    const logInHandler = async () => {
-      const data = await signIn;
-      if (typeof data === 'string') {
-        setError('password', {
-          type: 'custom',
-          message: t('please, provide correct credentials...'),
-        });
-        setError('username', {
-          type: 'custom',
-          message: t('please, provide correct credentials...'),
-        });
-      } else {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            login: true,
-            username: getValues('username'),
-          })
-        );
-        navigate('/dashboard/world');
-      }
-    };
-    logInHandler();
+  const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
+    try {
+      const response = await login({
+        username: data.username,
+        password: data.password,
+      });
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          login: true,
+          username: getValues('username'),
+        })
+      );
+      navigate('/dashboard/world');
+    } catch (error) {
+      setError('password', {
+        type: 'custom',
+        message: t('please, provide correct credentials...'),
+      });
+      setError('username', {
+        type: 'custom',
+        message: t('please, provide correct credentials...'),
+      });
+    }
   };
   return (
     <div className="w-full h-full flex">
@@ -77,11 +73,11 @@ const Login = () => {
           <div className="mt-2 text-[#808189]">
             {t('Welcome back! Please enter your details')}
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3">
+          <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-5">
             <Input
               label="username"
               text={t('username')}
-              inputClass={`w-full sm:w-1/2 lg:w-3/4 xl:w-2/3 h-9 lg:h-11 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 h-9 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.username,
                 touchedFields.username && getValues('username') !== ''
               )} outline-none`}
@@ -110,7 +106,7 @@ const Login = () => {
             <Input
               label="password"
               text={t('password')}
-              inputClass={`w-full sm:w-1/2 lg:w-3/4 h-9 lg:h-11 xl:w-2/3 2xl:w-1/2 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] focus:shadow-focusShadow ${setErrorStyle(
+              inputClass={`w-11/12 lg:w-1/2 h-9 lg:h-11 pt-1 pb-1 pl-3 pr-3 mt-1 border-2 rounded-lg focus:border-[#2029F3] ${setErrorStyle(
                 errors.password,
                 touchedFields.password && getValues('password') !== ''
               )} outline-none`}
@@ -130,7 +126,7 @@ const Login = () => {
               {errors.password && <img src={Warning} alt="" />}
               {errors.password && errors.password.message}
             </div>
-            <div className="w-full md:w-1/2 lg:w-full flex items-center text-center mt-4 whitespace-nowrap justify-between sm:flex-row sm:justify-between lg:mt-5">
+            <div className="flex items-center justify-between text-center mt-2 w-11/12 lg:w-1/2">
               <Input
                 label="remember"
                 text={t('Remember this device')}
@@ -148,13 +144,12 @@ const Login = () => {
                 {t('Forgot password?')}
               </Link>
             </div>
-            <div className="w-full  md:w-1/2 lg:w-full">
-              <Button type="submit" id="login_btn" className="w-full">
-                {t('log in')}
-              </Button>
-            </div>
+
+            <Button type="submit" id="login_btn" className="w-11/12 lg:w-1/2">
+              {t('log in')}
+            </Button>
           </form>
-          <div className="flex mt-6 items-center justify-center w-5/6 md:w-1/2 lg:w-3/4">
+          <div className="flex mt-6 items-center justify-center w-11/12 lg:w-1/2">
             {t('Don’t have and account?')}
             <Link to={'/registration'} className="text-[#2029F3] ml-2">
               {t('Sign up for free')}

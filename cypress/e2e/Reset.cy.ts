@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('login page testing', () => {
+describe('Reset page testing', () => {
   beforeEach(() => {
     cy.visit('/reset');
   });

@@ -29,7 +29,7 @@ const TableCol: React.FC<{
     }
   };
   return (
-    <div className="flex w-1/4 lg:w-1/6 items-center justify-center text-center gap-1 md:gap-3 md:pt-5 md:pb-5 md:pl-8 md:pr-8 rounded-t-lg">
+    <div className="flex w-1/4 lg:w-1/6 items-center justify-start pl-1 md:pl-3 lg:pl-5 text-center gap-1 md:gap-3 md:pt-5 md:pb-5 rounded-t-lg flex-shrink-0">
       <div
         className="text-semibold capitalize cursor-pointer"
         onClick={changeSortation}
@@ -37,7 +37,7 @@ const TableCol: React.FC<{
       >
         {props.text}
       </div>
-      <div className="flex flex-col items-center justify-center gap-1">
+      <div className="flex flex-col items-center justify-center gap-1 flex-shrink-0">
         <button
           onClick={() => {
             props.sortAsc();

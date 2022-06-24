@@ -42,27 +42,19 @@ const NewPassword = () => {
   const onSubmit: SubmitHandler<NewPasswordFormValues> = (
     data: NewPasswordFormValues
   ): void => {
-    const req = setNewPassword(
-      process.env.REACT_APP_API_URL + '/password/recover' || '',
-      {
+    try {
+      setNewPassword({
         hash: hash || '',
         password: data.new_password,
         repeatPassword: data.repeat_password,
-      }
-    );
-
-    const sent = async () => {
-      const data = await req;
-      if (data === '') {
-        setSentReq(false);
-      } else {
-        setError('new_password', {
-          type: 'custom',
-          message: t('invalid data provided.'),
-        });
-      }
-    };
-    sent();
+      });
+      setSentReq(true);
+    } catch (error) {
+      setError('new_password', {
+        type: 'custom',
+        message: t('invalid data provided.'),
+      });
+    }
   };
   return (
     <div className="flex flex-col w-full h-full justify-start items-center">

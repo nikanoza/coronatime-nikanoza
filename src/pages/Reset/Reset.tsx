@@ -33,27 +33,21 @@ const Reset = () => {
     return error ? 'border-[#CC1E1E]' : touched ? 'border-[#249E2C]' : '';
   };
 
-  const onSubmit: SubmitHandler<ResetFormValues> = (data): void => {
-    const recoveryReq = recovery(
-      process.env.REACT_APP_API_URL + '/password/send-recovery-link' || '',
-      {
+  const onSubmit: SubmitHandler<ResetFormValues> = async (
+    data
+  ): Promise<void> => {
+    try {
+      await recovery({
         email: data.email,
         backlink: process.env.REACT_APP_LOCAL_URL + '/new-password' || '',
-      }
-    );
-
-    const sentReq = async () => {
-      const data = await recoveryReq;
-      if (data === '') {
-        navigate('/sent-info');
-      } else {
-        setError('email', {
-          type: 'custom',
-          message: t('email not found'),
-        });
-      }
-    };
-    sentReq();
+      });
+      navigate('/sent-info');
+    } catch (error) {
+      setError('email', {
+        type: 'custom',
+        message: t('email not found'),
+      });
+    }
   };
 
   return (

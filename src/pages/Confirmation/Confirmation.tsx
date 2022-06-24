@@ -15,19 +15,21 @@ const Confirmation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (hash) {
-      onAccountConfirm(
-        process.env.REACT_APP_API_URL + '/confirm-account' || '',
-        { hash }
-      );
+    async function sent() {
+      try {
+        await onAccountConfirm({ hash: hash || '' });
+      } catch (error) {}
     }
-  });
+    if (hash) {
+      sent();
+    }
+  }, [hash]);
   useEffect(() => {
     const loginStatus = localStorage.getItem('user') || '';
     if (loginStatus && JSON.parse(loginStatus).login === true) {
       navigate('/dashboard/world');
     }
-  });
+  }, [navigate]);
   return (
     <div className="h-full">
       <div className="flex flex-col w-full h-full justify-start items-center xl:text-lg pb-5">
@@ -39,7 +41,7 @@ const Confirmation = () => {
         <Button
           id="confirm-btn"
           type="button"
-          className="w-5/6 lg:w-1/3 mt-auto md:mt-5 md:mb-auto"
+          className="w-5/6 md:w-1/3 lg:w-1/5 mt-auto md:mt-5 md:mb-auto"
         >
           <Link to={'/login'}>{t('sign in')}</Link>
         </Button>
