@@ -20,6 +20,12 @@ const Dashboard = () => {
       navigate('/login');
     }
   }, [navigate]);
+  useEffect(() => {
+    const storageStatistics = localStorage.getItem('statistics');
+    if (storageStatistics) {
+      setStatsState(JSON.parse(storageStatistics));
+    }
+  }, []);
   const { t } = useTranslation();
   let user: { login: string; username: string } = {
     login: 'false',
@@ -33,10 +39,13 @@ const Dashboard = () => {
   let token = localStorage.getItem('token');
   useEffect(() => {
     async function getData(token: string) {
+      console.log(1);
       try {
         const response = await getCountriesStatistics(token);
+        console.log(2);
         localStorage.setItem('statistics', JSON.stringify(response.data));
         setStatsState(response.data);
+        console.log(3);
         firstly = false;
       } catch (error) {}
     }
@@ -52,14 +61,12 @@ const Dashboard = () => {
     navigate('/login');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.removeItem('statistics');
   };
   const closeMenu: MouseEventHandler<HTMLDivElement> = (event) => {
     if (event.target !== menuRef.current && !collapseMenu) {
       setCollapseMenu(true);
     }
   };
-
   return (
     <div
       className="w-full h-full flex flex-col p-1 md:p-10"
@@ -67,7 +74,7 @@ const Dashboard = () => {
     >
       <header className="w-full flex items-center justify-between">
         <img src={Coronatime} alt="" />
-        <div className={'ml-auto mr-3'}>
+        <div className={collapseMenu ? 'ml-auto mr-3' : 'ml-auto mr-11'}>
           <Language />
         </div>
         <menu
