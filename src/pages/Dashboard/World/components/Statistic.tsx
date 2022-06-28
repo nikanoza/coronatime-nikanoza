@@ -8,7 +8,7 @@ const Statistic: React.FC<{
   return (
     <div
       className={
-        'rounded-2xl flex flex-col p-10 ' +
+        'rounded-2xl flex flex-col p-10 lg:h-80 ' +
         props.className +
         ' bg-opacity-[0.08] items-center justify-center w-full'
       }

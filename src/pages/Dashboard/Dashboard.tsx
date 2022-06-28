@@ -145,6 +145,7 @@ const Dashboard = () => {
           {t('By country')}
         </NavLink>
       </ul>
+      <hr className="border-[#F6F6F7]" />
       {!firstly && <Outlet context={{ statState }} />}
     </div>
   );

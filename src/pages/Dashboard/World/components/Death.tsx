@@ -14,7 +14,7 @@ const DeathSvg = () => {
       <path
         d="M1 35.5C41.2762 33 16.4144 23.5 48.7348 23.5C60.6685 23.5 55.1989 9.5 68.6243 9.5C82.0497 9.5 81.5525 10 91 1.5"
         stroke="#EAD621"
-        strokeWidth="2"
+        stroke-width="2"
       />
       <defs>
         <linearGradient
@@ -25,8 +25,8 @@ const DeathSvg = () => {
           y2="52"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#EAD621" stopOpacity="0.24" />
-          <stop offset="1" stopColor="#EAD621" stopOpacity="0" />
+          <stop stop-color="#EAD621" stop-opacity="0.24" />
+          <stop offset="1" stop-color="#EAD621" stop-opacity="0" />
         </linearGradient>
       </defs>
     </svg>
