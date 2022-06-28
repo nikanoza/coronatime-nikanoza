@@ -81,7 +81,10 @@ If you want to see test in action, you need install cypress first
 ```
 npm install cypress --save-dev
 ```
-also you need to create cypress.config.ts file and move settings from cypress.config.ts.example there,
+also you need to create cypress.config.ts file and move settings from cypress.config.ts.example there
+```
+cp cypress.config.ts.example cypress.config.ts
+```
 and also in the cypress folder is tsconfig.json file for some typescript configuration.
 
 after all open Cypress

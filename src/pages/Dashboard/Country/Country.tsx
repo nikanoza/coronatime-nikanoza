@@ -90,7 +90,7 @@ const Country = () => {
           id="filter_countries"
         />
       </div>
-      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-64 md:h-1/2 lg:h-5/6">
+      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full md:h-1/2 lg:h-5/6">
         <div className="flex bg-[#F6F6F7] flex-shrink-0">
           <TableCol
             text={t('location')}
