@@ -75,7 +75,7 @@ const Country = () => {
     setStatisticsClone(newArray);
   };
   return (
-    <div className="h-1/2 lg:h-3/4 text-xs lg:text-base">
+    <div className="h-2/3 lg:h-3/4 text-xs lg:text-base">
       <div className="flex">
         <img
           src={Search}
@@ -90,7 +90,7 @@ const Country = () => {
           id="filter_countries"
         />
       </div>
-      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full md:h-1/2 lg:h-5/6">
+      <div className="mt-2 w-full border-[#F6F6F7] border rounded-lg h-full lg:h-5/6">
         <div className="flex bg-[#F6F6F7] flex-shrink-0">
           <TableCol
             text={t('location')}
