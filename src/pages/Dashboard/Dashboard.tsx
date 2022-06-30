@@ -39,13 +39,19 @@ const Dashboard = () => {
   let token = localStorage.getItem('token');
   useEffect(() => {
     async function getData(token: string) {
-      console.log(1);
       try {
         const response = await getCountriesStatistics(token);
-        console.log(2);
-        localStorage.setItem('statistics', JSON.stringify(response.data));
-        setStatsState(response.data);
-        console.log(3);
+        const data = response.data.slice().map((country: CountryType) => {
+          if (country.name.ka === 'არმენია') {
+            country.name.ka = 'სომხეთი';
+          }
+          return country;
+        });
+        const sorted = data.sort((a: CountryType, b: CountryType) =>
+          a.name.ka.localeCompare(b.name.ka)
+        );
+        localStorage.setItem('statistics', JSON.stringify(sorted));
+        setStatsState(sorted);
         firstly = false;
       } catch (error) {}
     }
